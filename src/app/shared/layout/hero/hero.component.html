@@ -1,0 +1,25 @@
+<section class="relative min-h-[80vh] overflow-hidden bg-neutral-700">
+  <!-- Fondo -->
+  <img
+    [src]="image"
+    [alt]="title"
+    class="absolute inset-0 h-full w-full object-cover opacity-40"
+    loading="eager"
+    fetchpriority="high"
+  />
+  <!-- Capa de color -->
+  <div class="absolute inset-0" [ngClass]="overlayColor"></div>
+
+  <!-- Contenido -->
+  <div class="relative mx-auto max-w-7xl px-6 lg:px-12"
+       [class.pt-16]="pt==='pt-16'"
+       [class.pt-20]="pt==='pt-20'"
+       [class.pt-24]="pt==='pt-24'">
+    <div class="min-h-[60vh] flex items-end pb-10 text-white">
+      <div>
+        <h1 class="text-4xl sm:text-5xl font-semibold">{{ title }}</h1>
+        <p *ngIf="subtitle" class="mt-3 max-w-xl text-white/90">{{ subtitle }}</p>
+      </div>
+    </div>
+  </div>
+</section>

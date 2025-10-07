@@ -1,0 +1,46 @@
+<section id="contact"
+  class="relative isolate overflow-hidden
+         bg-gradient-to-br from-red-700 via-red-600 to-red-800
+         py-20 px-6 lg:px-12 text-center text-white min-h-[48vh]">
+  <!-- Contenido -->
+  <div class="relative max-w-4xl mx-auto">
+    <h1 class="tracking-tight leading-[1.05] text-5xl md:text-6xl lg:text-7xl text-white">
+      Contáctanos.
+    </h1>
+    <ul class="mt-12 max-w-3xl mx-auto border-y border-white/25 divide-y divide-white/15">
+      @for (item of items; track item.title) {
+        <li>
+          <details class="group">
+            <summary class="relative list-none flex items-center justify-center cursor-pointer select-none py-5 text-white/95 hover:text-white">
+              <span class="text-2xl md:text-3xl font-semibold tracking-wide">{{ item.title }}</span>
+
+              <dropdown-icon/>
+            </summary>
+
+            <div class="grid [grid-template-rows:0fr] group-open:[grid-template-rows:1fr] transition-[grid-template-rows] duration-400 ease-out">
+              <div class="min-h-0 overflow-hidden py-3">
+                @switch (item.type) {
+                  @case ('list') {
+                    <ul class="space-y-1 text-white/90">
+                      @for (line of item.lines ?? []; track $index) {
+                        <li>{{ line }}</li>
+                      }
+                    </ul>
+                  }
+                  @case ('rich') {
+                    <div class="text-white/90">
+                      <p>{{ item.text }}</p>
+                      <div class="font-medium">{{ item.email }}</div>
+                    </div>
+                  }
+                }
+              </div>
+            </div>
+          </details>
+        </li>
+      }
+    </ul>
+
+
+  </div>
+</section>
