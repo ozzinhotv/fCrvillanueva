@@ -1,0 +1,57 @@
+<!-- Overlay -->
+<div *ngIf="isOpen"
+     class="md:hidden fixed inset-0 z-40 bg-black/40 transition-opacity duration-200"
+     (click)="close()"></div>
+
+<!-- Panel -->
+<aside
+  class="md:hidden fixed inset-y-0 z-50 w-72 text-white
+         bg-neutral-900/80 backdrop-blur-md border-white/10 shadow-2xl
+         transition-transform duration-200 will-change-transform"
+  [class.right-0]="side==='right'"
+  [class.left-0]="side==='left'"
+  [class.translate-x-full]="side==='right' && !isOpen"
+  [class.-translate-x-full]="side==='left' && !isOpen"
+  [class.translate-x-0]="isOpen"
+  role="dialog" aria-modal="true" aria-label="Menú móvil"
+>
+  <div class="p-4 flex items-center justify-between border-b border-white/10">
+    <span class="font-semibold">Menú</span>
+    <button type="button"
+            class="rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-white/60 hover:bg-white/10"
+            aria-label="Cerrar menú"
+            (click)="close()">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6l-12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="px-3 pb-8 pt-3">
+    <ul class="space-y-1">
+      <li *ngFor="let l of links" class="space-y-1">
+        <!-- Padre (clicable si tiene routerLink) -->
+        <ng-container *ngIf="l.routerLink; else soloTexto">
+          <a [routerLink]="l.routerLink"
+             routerLinkActive="bg-white/10 text-white"
+             class="block rounded-lg px-3 py-2 text-white/95 hover:text-white hover:bg-white/10
+                    focus:outline-none focus:ring-2 focus:ring-white/40"
+             (click)="close()">{{ l.label }}</a>
+        </ng-container>
+        <ng-template #soloTexto>
+          <span class="block rounded-lg px-3 py-2 text-white/85">{{ l.label }}</span>
+        </ng-template>
+
+        <!-- Sublabels (hijos) opcionales -->
+        <div *ngIf="l.children?.length" class="px-3 -mt-1">
+          <div class="text-sm text-white/75 flex flex-wrap gap-x-3 gap-y-1">
+            <a *ngFor="let c of l.children"
+               [routerLink]="c.routerLink"
+               class="underline-offset-4 hover:underline hover:text-white"
+               (click)="close()">{{ c.label }}</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</aside>
