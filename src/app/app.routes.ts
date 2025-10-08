@@ -4,6 +4,8 @@ import { VidaComponent } from './page/vida/vida.component';
 import { ObraComponent } from './page/obra/obra.component';
 import { EscritosComponent } from './page/escritos/escritos.component';
 
+import OBRA_ROUTES from './page/obra/obra.routes';
+
 export const routes: Routes = [
   {
     path: '',
@@ -13,10 +15,7 @@ export const routes: Routes = [
     path: 'vida',
     component: VidaComponent
   },
-  {
-    path: 'obra',
-    component: ObraComponent
-  },
+  ...OBRA_ROUTES,
   {
     path: 'escritos',
     component: EscritosComponent
