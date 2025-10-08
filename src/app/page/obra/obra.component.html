@@ -1,7 +1,20 @@
 <app-hero
-  image="assets/img/hero/croquisCaoma-1.png"
-  title="Obra"
-  subtitle="Legado de un arquitecto"
-  overlayColor="bg-red/600"
-  pt="pt-24">
+  [image]="data.hero.image"
+  [title]="data.hero.title"
+  [subtitle]="data.hero.subtitle"
+  [overlayColor]="data.hero.overlayColor"
+  [pt]="data.hero.pt">
 </app-hero>
+
+
+<!-- Texto -->
+<obra-text-block
+  [category]="data.category"
+  [work]="data.work"
+  [contentHtml]="data.introHtml">
+</obra-text-block>
+
+<!-- Galerías (pueden ser muchas) -->
+<ng-container *ngFor="let g of data.galleries">
+  <obra-gallery [gallery]="g"></obra-gallery>
+</ng-container>

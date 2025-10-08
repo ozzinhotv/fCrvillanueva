@@ -1,0 +1,13 @@
+<section class="container mx-auto px-4 pb-12">
+      <h3 *ngIf="gallery?.title" class="text-lg font-semibold mb-3">{{ gallery?.title }}</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <figure *ngFor="let it of gallery?.items"
+                class="group overflow-hidden rounded-lg border border-neutral-200 bg-white">
+          <div class="h-44 w-full" [ngClass]="it.placeholder || 'bg-neutral-200'"></div>
+          <figcaption class="p-3">
+            <p class="font-medium">{{ it.title }}</p>
+            <p *ngIf="it.note" class="text-xs text-neutral-500">{{ it.note }}</p>
+          </figcaption>
+        </figure>
+      </div>
+</section>
