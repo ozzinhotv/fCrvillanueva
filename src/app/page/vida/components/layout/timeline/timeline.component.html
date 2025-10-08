@@ -1,0 +1,8 @@
+<section class="px-4 py-8 space-y-10">
+  <timeline-group
+    *ngFor="let g of groups"
+    [label]="g.label"
+    [bgClass]="g.bgClass ?? ''"
+    [items]="g.items"
+  />
+</section>

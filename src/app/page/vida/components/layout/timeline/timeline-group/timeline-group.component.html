@@ -1,0 +1,11 @@
+<section class="rounded-xl p-4 md:p-6" [ngClass]="bgClass">
+  <header class="mb-4">
+    <h3 class="text-sm uppercase tracking-wide text-neutral-500">{{ label }}</h3>
+  </header>
+
+  <ol class="space-y-4">
+    <li *ngFor="let it of items">
+      <timeline-item [item]="it"/>
+    </li>
+  </ol>
+</section>

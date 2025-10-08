@@ -1,0 +1,18 @@
+<div class="relative pl-6">
+  <!-- rail gris vertical -->
+  <div class="absolute left-2 top-0 bottom-0 w-[2px] bg-neutral-200"></div>
+
+  <!-- punto -->
+  <span class="absolute left-[6px] top-4 h-3 w-3 rounded-full bg-white ring-2 ring-neutral-300">
+    <span class="block h-2 w-2 rounded-full bg-red-500 translate-x-[3px] translate-y-[3px]"></span>
+  </span>
+
+  <!-- card -->
+  <vida-card
+    [year]="item?.year"
+    [title]="item?.title"
+    [text]="item?.text"
+    [placeholderColor]="item?.placeholderColor || '#e5e7eb'"
+    [imageSide]="item?.imageSide || 'right'">
+  </vida-card>
+</div>
