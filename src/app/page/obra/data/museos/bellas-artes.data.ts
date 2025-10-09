@@ -7,7 +7,7 @@ export const MUSEO_DE_BELLAS_ARTES_DATA: ObraData = {
     image: 'assets/img/hero/croquisCaoma-1.png',
     title: 'Museos',
     subtitle: 'Museo de Bellas Artes',
-    overlayColor: 'bg-red-600', // ojo: Tailwind usa guion, no slash
+    overlayColor: '', // ojo: Tailwind usa guion, no slash
     pt: 'pt-24',
   },
   introHtml: `

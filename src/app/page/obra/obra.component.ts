@@ -1,28 +1,27 @@
-import { Component, inject, signal, effect } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { HeroComponent } from '../../shared/layout/hero/hero.component';
 import { TextBlockComponent } from './components/text-block/text-block.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
-
 import { ObraData } from './interfaces/obra-data.interface';
 import { DATA_LOADERS } from './data/registry';
+import { SubnavObraComponent } from './components/subnav/subnav-obra.component';
 
 @Component({
   selector: 'app-obra',
-  standalone: true,
-  imports: [CommonModule, HeroComponent, TextBlockComponent, GalleryComponent],
+  imports: [CommonModule, HeroComponent, TextBlockComponent, GalleryComponent, SubnavObraComponent],
   templateUrl: './obra.component.html',
 })
 export class ObraComponent {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   data = signal<ObraData | null>(null);
 
   constructor() {
-    effect(() => {
-      const cat = this.route.snapshot.paramMap.get('cat') ?? 'ciudad-universitaria';
-      const work = this.route.snapshot.paramMap.get('work') ?? 'aula-magna';
+    this.route.paramMap.subscribe(pm => {
+      const cat = pm.get('cat') ?? 'ciudad-universitaria';
+      const work = pm.get('work') ?? 'aula-magna';
       this.loadData(cat, work);
     });
   }
@@ -32,6 +31,8 @@ export class ObraComponent {
     const loader = DATA_LOADERS[path];
 
     if (!loader) {
+      // si prefieres volver al landing:
+      // this.router.navigateByUrl('/obra', { replaceUrl: true }); return;
       this.data.set({
         category: 'Obra no encontrada',
         work: `${cat}/${work}`,
@@ -49,7 +50,7 @@ export class ObraComponent {
     }
 
     const mod = await loader();
-    const exportName = Object.keys(mod)[0]; // e.g., AULA_MAGNA_DATA
+    const exportName = Object.keys(mod)[0];
     this.data.set(mod[exportName] as ObraData);
   }
 }
