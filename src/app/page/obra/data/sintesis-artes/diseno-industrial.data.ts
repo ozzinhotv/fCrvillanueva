@@ -1,0 +1,25 @@
+import { ObraData } from '../../interfaces/obra-data.interface';
+
+export const DISENO_INDUSTRIAL_DATA: ObraData = {
+  category: 'Síntesis de las Artes',
+  work: 'Diseño Industrial',
+  hero: {
+    image: 'assets/img/hero/croquisCaoma-1.png',
+    title: 'Obra',
+    subtitle: 'Legado de un arquitecto',
+    overlayColor: 'bg-red-600',
+    pt: 'pt-24',
+  },
+  introHtml: `
+    <p>Descripción breve de la Diseño Industrial…</p>
+  `,
+  galleries: [
+    {
+      title: 'Galería principal',
+      items: [
+        { id: 'fi-01', title: 'Fachada',        placeholder: 'bg-neutral-300' },
+        { id: 'fi-02', title: 'Patio central',  placeholder: 'bg-blue-300' },
+      ],
+    },
+  ],
+};

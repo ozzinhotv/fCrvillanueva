@@ -1,10 +1,22 @@
 import { Routes } from '@angular/router';
-import { ObraComponent } from './obra.component';
 
 const OBRA_ROUTES: Routes = [
-  { path: 'obra', redirectTo: 'obra/ciudad-universitaria/aula-magna', pathMatch: 'full' },
-  { path: 'obra/:cat', redirectTo: 'obra/:cat/aula-magna', pathMatch: 'full' },
-  { path: 'obra/:cat/:work', component: ObraComponent },
+  // /obra → a tu landing general (raíz)
+  { path: 'obra', redirectTo: '', pathMatch: 'full' },
+
+  // /obra/:cat → redirección dinámica (standalone; se importa LAZY)
+  {
+    path: 'obra/:cat',
+    loadComponent: () =>
+      import('./components/redirect/redirect.component').then(m => m.ObraRedirectComponent),
+  },
+
+  // /obra/:cat/:work → detalle (standalone; se importa LAZY)
+  {
+    path: 'obra/:cat/:work',
+    loadComponent: () =>
+      import('./obra.component').then(m => m.ObraComponent),
+  },
 ];
 
 export default OBRA_ROUTES;
