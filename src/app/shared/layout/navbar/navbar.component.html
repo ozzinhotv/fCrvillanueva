@@ -1,68 +1,144 @@
-<!-- header.component.html (o donde tengas el navbar) -->
-<nav class="fixed top-0 inset-x-0 z-50 bg-transparent">
-  <div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center justify-between border border-white/10
-           bg-neutral-900/20 backdrop-blur-md
-           shadow-lg shadow-black/5 text-white">
-    <!-- Brand -->
-    <a routerLink="/" class="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 rounded-lg">
-      <img src="assets/img/shared/navbar/logoblack.jpg.gif" alt="Fundación Villanueva" class="h-10 w-auto">
-      <span class="sr-only">Inicio</span>
-    </a>
+<!-- NAVBAR fijo -->
+<nav class="fixed md:top-4 inset-x-0 z-50 bg-transparent">
+  <!-- group: al pasar por el navbar entero se expande -->
+  <div
+    class="group w-full max-w-7xl mx-auto px-6 lg:px-12
+           text-white border border-white/10
+           bg-neutral-900/30 backdrop-blur-md shadow-lg shadow-black/10 md:rounded-xl
+           relative">
 
-    <!-- Links (desktop) -->
-    <ul class="hidden md:flex items-center gap-8">
-      <li><a routerLink="/vida"     routerLinkActive="text-red-500" class="hover:text-red-500 transition-colors">Vida</a></li>
-      <li>
-        <a routerLink="/obra"     routerLinkActive="text-red-500" class="hover:text-red-500 transition-colors">Obra</a>
-      </li>
-      <li><a routerLink="/escritos" routerLinkActive="text-red-500" class="hover:text-red-500 transition-colors">Escritos</a></li>
-    </ul>
+    <!-- fila superior: logo + links -->
+    <div class="py-3 flex items-center justify-between">
+      <!-- LOGO (opcional: leve zoom cuando expandido) -->
+      <a routerLink="/" class="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 rounded-lg">
+        <img
+          src="assets/img/shared/navbar/logoblack.jpg.gif"
+          alt="Fundación Villanueva"
+          class="h-10 w-auto transition-transform duration-200 ease-out group-hover:scale-[1.03] origin-left"
+        />
+        <span class="sr-only">Inicio</span>
+      </a>
 
-    <!-- Menú móvil -->
-    <div class="md:hidden relative group">
+      <!-- LINKS DESKTOP -->
+      <ul class="hidden md:flex items-center gap-8">
+        <li>
+          <a routerLink="/vida" routerLinkActive="text-red-500"
+             class="hover:text-red-500 transition-colors">Vida</a>
+        </li>
+
+        <!-- Obra: no abre su propio dropdown; el navbar completo se expande -->
+        <li class="relative">
+          <a routerLink="/obra"
+             class="inline-flex items-center gap-1 hover:text-red-500 transition-colors">
+            Obra
+            <svg class="h-4 w-4 transition-transform duration-150 group-hover:rotate-180"
+                 viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.19l3.71-3.96a.75.75 0 011.08 1.04l-4.24 4.52a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"/>
+            </svg>
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/escritos" routerLinkActive="text-red-500"
+             class="hover:text-red-500 transition-colors">Escritos</a>
+        </li>
+      </ul>
+
+      <!-- BOTÓN MÓVIL (queda igual que ya tienes en tu implementación actual) -->
       <button
         type="button"
         class="md:hidden -m-2 p-2 rounded-lg inline-flex items-center gap-2
-              hover:text-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600"
+               hover:text-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600"
         aria-label="Abrir menú"
-        [attr.aria-expanded]="isSidebarOpen"
-        (click)="toggleSidebar()"
-      >
-        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" *ngIf="!isSidebarOpen">
+        [attr.aria-expanded]="isOpen()"
+        (click)="toggle()">
+        <svg *ngIf="!isOpen()" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/>
         </svg>
-        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" *ngIf="isSidebarOpen">
+        <svg *ngIf="isOpen()" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6l-12 12"/>
         </svg>
         <span class="sr-only">Abrir menú</span>
       </button>
-
-      <!-- Instancia del Sidebar: mismo lado que el botón -->
-      <sidebar
-        [isOpen]="isSidebarOpen"
-        side="right"
-        [links]="[
-          { label: 'Vida', routerLink: '/vida' },
-          {
-            label: 'Obra',
-            routerLink: '/obra',
-            children: [
-              { label: 'obra1', routerLink: '/obra/obra1' },
-              { label: 'obra2', routerLink: '/obra/obra2' },
-              { label: 'obra3', routerLink: '/obra/obra3' }
-            ]
-          },
-          {
-            label: 'Escritos',
-            routerLink: '/escritos',
-            children: [
-              { label: 'ensayos',   routerLink: '/escritos/ensayos' },
-              { label: 'crónicas',  routerLink: '/escritos/cronicas' },
-              { label: 'artículos', routerLink: '/escritos/articulos' }
-            ]
-          }
-        ]"
-        (closed)="isSidebarOpen = false"/>
     </div>
+
+    <!-- PANEL EXPANDIBLE (solo desktop) -->
+    <div
+      class="hidden md:block overflow-hidden border-t border-white/10
+             max-h-0 opacity-0 -translate-y-1
+             transition-all duration-200 ease-out origin-top
+             group-hover:max-h-80 group-hover:opacity-100 group-hover:translate-y-0">
+
+      <!-- contenido del dropdown que “empuja” hacia abajo el mismo navbar -->
+      <div class="px-2 py-3">
+        <!-- título -->
+        <div class="px-1 text-sm font-medium text-white/80 mb-2">
+          Obra
+        </div>
+        <!-- categorías en UNA sola columna -->
+        <ul class="flex flex-col">
+          <li *ngFor="let c of obraCategories()">
+            <a
+              [routerLink]="c.path"
+              class="block rounded-md px-3 py-2 text-white/90 hover:text-white hover:bg-white/10"
+            >
+              {{ c.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /PANEL -->
   </div>
 </nav>
+
+<!-- OVERLAY MÓVIL -->
+<div *ngIf="isOpen()" class="md:hidden fixed inset-0 z-40 bg-black/50" (click)="close()"></div>
+
+<!-- SIDEBAR MÓVIL -->
+<aside
+  class="md:hidden fixed inset-y-0 right-0 z-[60] w-72 text-white
+         bg-neutral-900/85 backdrop-blur-lg border-l border-white/10 shadow-2xl shadow-black/40
+         transform transition-transform duration-200 will-change-transform p-4"
+  [ngClass]="isOpen() ? 'translate-x-0' : 'translate-x-full'"
+  (click)="$event.stopPropagation()">
+
+  <div class="flex items-center justify-between mb-3 pb-3 border-b border-white/10">
+    <span class="font-semibold">Menú</span>
+    <button type="button"
+            class="rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-white/60 hover:bg-white/10"
+            aria-label="Cerrar menú"
+            (click)="close()">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6l-12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="space-y-1">
+    <a routerLink="/vida"
+       class="block rounded-lg px-3 py-2 text-white/95 hover:text-white hover:bg-white/10"
+       (click)="close()">Vida</a>
+
+    <div>
+      <a routerLink="/obra"
+         class="block rounded-lg px-3 py-2 text-white/95 hover:text-white hover:bg-white/10"
+         (click)="close()">Obra</a>
+
+      <ul class="mt-1 space-y-1 px-2">
+        <li *ngFor="let c of obraCategories()">
+          <a [routerLink]="c.path"
+             class="block rounded-md px-3 py-2 text-white/90 hover:text-white hover:bg-white/10"
+             (click)="close()">
+            {{ c.label }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <a routerLink="/escritos"
+       class="block rounded-lg px-3 py-2 text-white/95 hover:text-white hover:bg-white/10"
+       (click)="close()">Escritos</a>
+  </nav>
+</aside>
