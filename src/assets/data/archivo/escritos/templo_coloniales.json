@@ -1,0 +1,11 @@
+[
+  {
+    "id": "templo-coloniales",
+    "category": "escrito",
+    "title": "Templo Coloniales",
+    "author": "Carlos Raúl Villanueva",
+    "date": "1958-06-20",
+    "summary": "Introducción breve a la escrito (1–2 frases).",
+    "contentPath": "assets/data/archivo/escritos/content/templo_coloniales.md"
+  }
+]

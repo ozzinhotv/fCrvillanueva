@@ -1,0 +1,11 @@
+[
+  {
+    "id": "reflexiones-personales",
+    "category": "conferencia",
+    "title": "Reflexiones Personales",
+    "author": "Carlos Raúl Villanueva",
+    "date": "1961-10-15",
+    "summary": "Resumen corto del conferencia para mostrarse en el feed principal.",
+    "contentPath": "assets/data/archivo/conferencias/content/reflexiones_personales.md"
+  }
+]

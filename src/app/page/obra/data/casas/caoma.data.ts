@@ -7,7 +7,7 @@ export const CAOMA_DATA: ObraData = {
     image: 'assets/img/hero/croquisCaoma-1.png',
     title: 'Casas',
     subtitle: 'Caoma',
-    overlayColor: 'bg-red-600', // ojo: Tailwind usa guion, no slash
+    overlayColor: 'bg-red-60', // ojo: Tailwind usa guion, no slash
     pt: 'pt-24',
   },
   introHtml: `

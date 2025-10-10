@@ -6,8 +6,8 @@ export const SOTAVENTO_DATA: ObraData = {
   hero: {
     image: 'assets/img/hero/croquisCaoma-1.png',
     title: 'Obra',
-    subtitle: 'Legado de un arquitecto',
-    overlayColor: 'bg-red-600',
+    subtitle: 'Sotavento',
+    overlayColor: 'bg-red-60',
     pt: 'pt-24',
   },
   introHtml: `

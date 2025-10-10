@@ -1,0 +1,11 @@
+[
+  {
+    "id": "encuesta-alumnos-tradicion",
+    "category": "articulo",
+    "title": "Encuesta de los alumnos de arquitectura sobre tradición",
+    "author": "Carlos Raúl Villanueva",
+    "date": "1954-03-01",
+    "summary": "Breve descripción de la lectura (2–3 líneas) para la card del feed.",
+    "contentPath": "assets/data/archivo/articulos/content/encuesta_alumno.md"
+  }
+]
