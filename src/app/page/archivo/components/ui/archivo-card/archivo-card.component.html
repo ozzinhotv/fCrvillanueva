@@ -1,0 +1,24 @@
+<article class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition">
+  <img *ngIf="item.coverImage" [src]="item.coverImage" alt="" class="w-full h-44 object-cover">
+  <div class="p-4 space-y-2">
+    <div class="text-xs uppercase tracking-wide opacity-70">
+      {{ item.category }}
+    </div>
+    <h3 class="text-lg font-semibold leading-snug">
+      {{ item.title }}
+    </h3>
+    <p class="text-sm opacity-85 line-clamp-3">
+      {{ item.summary }}
+    </p>
+    <div class="text-xs text-white/60">
+      {{ item.author }} • {{ item.date | date:'mediumDate' }}
+    </div>
+
+    <div class="pt-2">
+      <button type="button"
+              class="text-sm underline underline-offset-4 hover:no-underline">
+        Ver más
+      </button>
+    </div>
+  </div>
+</article>

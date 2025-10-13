@@ -1,0 +1,13 @@
+<div class="mb-6 flex gap-2 overflow-x-auto no-scrollbar">
+  <button
+    *ngFor="let c of categories"
+    type="button"
+    (click)="select(c.key)"
+    class="px-4 py-2 rounded-full text-sm font-medium border transition
+           border-white/10 bg-white/5 hover:bg-white/10
+           aria-pressed:shadow-inner"
+    [class.bg-red-600]="selected === c.key"
+    [attr.aria-pressed]="selected === c.key">
+    {{ c.label }}
+  </button>
+</div>

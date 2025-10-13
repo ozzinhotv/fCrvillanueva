@@ -1,0 +1,20 @@
+<!-- Loader -->
+<div *ngIf="loading" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+  <div *ngFor="let s of [1,2,3,4,5,6]" class="animate-pulse bg-white/5 border border-white/10 rounded-2xl h-64"></div>
+</div>
+
+<!-- Lista -->
+<div *ngIf="!loading && items.length" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+  <button
+    type="button"
+    class="text-left"
+    *ngFor="let it of items; trackBy: trackById"
+    (click)="openItem(it)">
+    <archivo-card [item]="it"/>
+  </button>
+</div>
+
+<!-- Empty -->
+<div *ngIf="!loading && !items.length" class="text-center py-16 opacity-70">
+  No hay resultados para este filtro.
+</div>
