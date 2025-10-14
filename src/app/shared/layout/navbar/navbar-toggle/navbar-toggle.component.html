@@ -1,0 +1,7 @@
+<button type="button"
+        class="md:hidden -m-2 p-2 rounded-lg inline-flex items-center gap-2 hover:text-red-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600"
+        [attr.aria-expanded]="isOpen()" (click)="state.toggle()" aria-label="Abrir menú">
+  <svg *ngIf="!isOpen()" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
+  <svg *ngIf="isOpen()" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6l-12 12"/></svg>
+  <span class="sr-only">Abrir menú</span>
+</button>

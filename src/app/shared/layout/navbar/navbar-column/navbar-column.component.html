@@ -1,0 +1,11 @@
+<div>
+  <div class="px-1 text-sm font-medium text-white/80 mb-2">{{ data.title }}</div>
+  <ul class="flex flex-col">
+    <li *ngFor="let it of data.items">
+      <a [routerLink]="it.path" [queryParams]="it.queryParams"
+         class="block rounded-md px-3 py-2 text-white/90 hover:text-white hover:bg-white/10">
+        {{ it.label }}
+      </a>
+    </li>
+  </ul>
+</div>

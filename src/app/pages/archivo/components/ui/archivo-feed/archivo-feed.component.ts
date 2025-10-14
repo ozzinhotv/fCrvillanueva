@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ArchivoCardComponent } from '../../ui/archivo-card/archivo-card.component';
+import { ArchivoCardComponent } from '../archivo-card/archivo-card.component';
 import { ArchivoItem } from '../../../interface/archivo.interface';
 
 type Cat = 'todos' | 'articulo' | 'escrito' | 'conferencia';

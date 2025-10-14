@@ -1,0 +1,46 @@
+<aside *ngIf="isOpen()"
+  class="fixed inset-y-0 right-0 z-[70] w-72 md:hidden
+         text-white bg-neutral-900/85 backdrop-blur-lg
+         border-l border-white/10 shadow-2xl shadow-black/40
+         transform transition-transform duration-200 will-change-transform p-4
+         translate-x-0"
+  (click)="$event.stopPropagation()">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-3 pb-3 border-b border-white/10">
+    <span class="font-semibold">Menú</span>
+    <button type="button"
+      class="rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-white/60 hover:bg-white/10"
+      aria-label="Cerrar menú" (click)="state.close()">
+      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6l-12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- CONTENIDO -->
+  <nav class="space-y-4 overflow-y-auto max-h-[calc(100vh-5.5rem)] pr-1">
+    <div *ngFor="let col of columns">
+      <!-- Título enlazado si hay items -->
+      <a *ngIf="col.items?.length; else plainTitle"
+         class="block rounded-lg px-3 py-2 text-white/95 hover:text-white hover:bg-white/10"
+         [routerLink]="col.items[0].path"
+         [queryParams]="col.items[0].queryParams"
+         (click)="state.close()">
+        {{ col.title }}
+      </a>
+      <ng-template #plainTitle>
+        <span class="block rounded-lg px-3 py-2 text-white/60">{{ col.title }}</span>
+      </ng-template>
+
+      <ul class="mt-1 space-y-1 px-2">
+        <li *ngFor="let it of col.items">
+          <a class="block rounded-md px-3 py-2 text-white/90 hover:text-white hover:bg-white/10"
+             [routerLink]="it.path" [queryParams]="it.queryParams" (click)="state.close()">
+            {{ it.label }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</aside>

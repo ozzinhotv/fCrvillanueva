@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { LandingComponent } from './page/landing/landing.component';
-import { VidaComponent } from './page/vida/vida.component';
+import { LandingComponent } from './pages/landing/landing.component';
+import { VidaComponent } from './pages/vida/vida.component';
 
-import OBRA_ROUTES from './page/obra/obra.routes';
+import OBRA_ROUTES from './pages/obra/obra.routes';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },   // landing general
@@ -10,12 +10,12 @@ export const routes: Routes = [
   ...OBRA_ROUTES,
   {
     path: 'archivo',
-    loadComponent: () => import('./page/archivo/archivo.component')
+    loadComponent: () => import('./pages/archivo/archivo.component')
       .then(m => m.ArchivoComponent),
   },
   {
     path: 'archivo/:category/:id',
-    loadComponent: () => import('./page/archivo/archivo.component')
+    loadComponent: () => import('./pages/archivo/archivo.component')
       .then(m => m.ArchivoComponent),
   },
   { path: '**', redirectTo: '' },
