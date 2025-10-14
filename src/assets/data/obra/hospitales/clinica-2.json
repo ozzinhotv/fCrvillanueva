@@ -1,14 +1,14 @@
 {
-  "category": "Museos",
-  "work": "Museo de Arte Moderno Jesús Soto",
+  "category": "Hospitales",
+  "work": "Clinica 2",
   "hero": {
     "image": "assets/img/hero/croquisCaoma-1.png",
-    "title": "Obra",
-    "subtitle": "Legado de un arquitecto",
-    "overlayColor": "bg-purple-600",
+    "title": "Hospitales",
+    "subtitle": "Clinica 2",
+    "overlayColor": "bg-yellow-300",
     "pt": "pt-24"
   },
-  "introHtml": "<p>Descripción breve de la Facultad de Ingeniería…</p>",
+  "introHtml": "<p>Descripción breve de la Clinica 2…</p>",
   "galleries": [
     {
       "title": "Galería principal",
@@ -19,3 +19,4 @@
     }
   ]
 }
+

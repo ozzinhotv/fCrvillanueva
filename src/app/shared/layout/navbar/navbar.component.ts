@@ -1,18 +1,16 @@
 import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
-import { NAV_INDEX, CATEGORY_LABELS } from '../../../page/obra/data/registry';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { NAV_INDEX, CATEGORY_LABELS } from '../../../page/obra/data/obra.registry';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
   isOpen = signal(false);
-
-  constructor(private router: Router) {}
 
   obraCategories = computed(() => {
     const cats = Object.keys(NAV_INDEX).sort();
@@ -23,20 +21,12 @@ export class NavbarComponent {
     }));
   });
 
+  // ✨ NUEVO: categorías de Archivo (con las 3 fijas)
   archivoCategories = [
-    { key: 'articulo', label: 'Artículos' },
-    { key: 'escrito', label: 'Escritos' },
-    { key: 'conferencia', label: 'Conferencias' },
+    { key: 'articulo',     label: 'Artículos' },
+    { key: 'escrito',      label: 'Escritos' },
+    { key: 'conferencia',  label: 'Conferencias' },
   ] as const;
-
-  isSectionActive(section: 'obra'|'archivo'|'vida'): boolean {
-    const url = this.router.url;
-    switch (section) {
-      case 'obra':     return url.startsWith('/obra');
-      case 'archivo':  return url.startsWith('/archivo');
-      case 'vida':     return url.startsWith('/vida');
-    }
-  }
 
   toggle() { this.isOpen.update(v => !v); }
   close()  { this.isOpen.set(false); }
@@ -44,4 +34,6 @@ export class NavbarComponent {
   private pretty(s: string) {
     return s.replace(/[-_]/g, ' ').replace(/\b\w/g, ch => ch.toUpperCase());
   }
+
+
 }

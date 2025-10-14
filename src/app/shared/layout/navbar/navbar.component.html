@@ -17,30 +17,28 @@
         <!-- Vida -->
         <li>
           <a routerLink="/vida"
-             [class.text-red-500]="isSectionActive('vida')"
-             class="hover:text-red-500 transition-colors">Vida</a>
+            routerLinkActive="text-red-500"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="hover:text-red-500 transition-colors">Vida
+          </a>
         </li>
 
         <!-- Obra -->
         <li class="relative">
           <a routerLink="/obra"
-             [class.text-red-500]="isSectionActive('obra')"
-             class="inline-flex items-center gap-1 hover:text-red-500 transition-colors">
+            routerLinkActive="text-red-500"
+            class="inline-flex items-center gap-1 hover:text-red-500 transition-colors">
             Obra
-            <svg class="h-4 w-4 transition-transform duration-150 group-hover:rotate-180"
-                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd"
-                d="M5.23 7.21a.75.75 0 011.06.02L10 11.19l3.71-3.96a.75.75 0 011.08 1.04l-4.24 4.52a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"/>
-            </svg>
           </a>
         </li>
 
         <!-- Archivo -->
         <li>
           <a [routerLink]="['/archivo']"
-             [queryParams]="{ cat: 'todos' }"
-             [class.text-red-500]="isSectionActive('archivo')"
-             class="hover:text-red-500 transition-colors">Archivo</a>
+            [queryParams]="{ cat: 'todos' }"
+            routerLinkActive="text-red-500"
+            class="hover:text-red-500 transition-colors">Archivo
+          </a>
         </li>
       </ul>
 

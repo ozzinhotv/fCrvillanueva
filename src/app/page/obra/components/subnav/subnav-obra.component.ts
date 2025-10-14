@@ -1,8 +1,7 @@
 import { Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, ActivatedRoute } from '@angular/router';
-import { NAV_INDEX, DATA_LOADERS, CATEGORY_LABELS } from '../../data/registry';
-import { ObraData } from '../../interfaces/obra-data.interface';
+import { NAV_INDEX, CATEGORY_LABELS, TITLES } from '../../data/obra.registry';
 
 type WorkEntry = { slug: string; title: string };
 
@@ -15,8 +14,7 @@ type WorkEntry = { slug: string; title: string };
 export class SubnavObraComponent {
   private route = inject(ActivatedRoute);
 
-  isOpen = signal(false); // solo para móvil
-
+  isOpen = signal(false);
   cat = signal('');
   work = signal('');
   works = signal<WorkEntry[]>([]);
@@ -30,35 +28,26 @@ export class SubnavObraComponent {
   });
 
   constructor() {
-    this.route.paramMap.subscribe(async pm => {
+    this.route.paramMap.subscribe(pm => {
       const c = pm.get('cat') ?? '';
       const w = pm.get('work') ?? '';
       const catChanged = c !== this.cat();
 
       this.cat.set(c);
       this.work.set(w);
-      this.isOpen.set(false); // plegado por defecto en móvil
+      this.isOpen.set(false);
 
-      if (catChanged) await this.loadTitlesForCategory(c);
+      if (catChanged) this.loadTitlesForCategory(c);
     });
   }
 
   toggle() { this.isOpen.update(v => !v); }
 
-  private async loadTitlesForCategory(cat: string) {
+  private loadTitlesForCategory(cat: string) {
     const slugs = NAV_INDEX[cat] ?? [];
-    const entries = await Promise.all(slugs.map(async (slug) => {
-      const path = `./data/${cat}/${slug}.data.ts`;
-      const loader = DATA_LOADERS[path];
-      if (!loader) return { slug, title: this.pretty(slug) };
-      try {
-        const mod = await loader();
-        const exportName = Object.keys(mod)[0];
-        const data = mod[exportName] as ObraData;
-        return { slug, title: data?.work ?? this.pretty(slug) };
-      } catch {
-        return { slug, title: this.pretty(slug) };
-      }
+    const entries: WorkEntry[] = slugs.map(slug => ({
+      slug,
+      title: TITLES[slug] ?? this.pretty(slug),
     }));
     this.works.set(entries);
   }

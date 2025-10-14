@@ -3,8 +3,8 @@
   "work": "Facultad de Ingeniería",
   "hero": {
     "image": "assets/img/hero/croquisCaoma-1.png",
-    "title": "Obra",
-    "subtitle": "Legado de un arquitecto",
+    "title": "Ciudad Universitaria",
+    "subtitle": "Facultad de Ingeniería",
     "overlayColor": "bg-red-600",
     "pt": "pt-24"
   },

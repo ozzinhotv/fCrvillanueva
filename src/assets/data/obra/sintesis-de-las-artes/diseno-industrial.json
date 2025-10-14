@@ -3,9 +3,9 @@
   "work": "Diseño Industrial",
   "hero": {
     "image": "assets/img/hero/croquisCaoma-1.png",
-    "title": "Obra",
-    "subtitle": "Legado de un arquitecto",
-    "overlayColor": "bg-red-600",
+    "title": "Síntesis de las Artes",
+    "subtitle": "Diseño Industrial",
+    "overlayColor": "bg-blue-600",
     "pt": "pt-24"
   },
   "introHtml": "<p>Descripción breve de la Diseño Industrial…</p>",

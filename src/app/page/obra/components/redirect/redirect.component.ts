@@ -1,8 +1,7 @@
 // src/app/page/obra/obra-redirect.component.ts
 import { Component, inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NAV_INDEX, getDefaultWork } from '../../data/registry';
-
+import { NAV_INDEX } from '../../data/obra.registry';  // <-- nuevo registry plano
 
 @Component({
   standalone: true,
@@ -14,16 +13,16 @@ export class ObraRedirectComponent {
 
   constructor() {
     const cat = this.route.snapshot.paramMap.get('cat') ?? '';
-    if (!NAV_INDEX[cat]) {
-      // categoría inválida -> landing
+
+    // categoría inválida -> landing de obra
+    const works = NAV_INDEX[cat];
+    if (!works || works.length === 0) {
       this.router.navigateByUrl('/obra', { replaceUrl: true });
       return;
     }
-    const work = getDefaultWork(cat);
-    if (!work) {
-      this.router.navigateByUrl('/obra', { replaceUrl: true });
-      return;
-    }
+
+    // default = primer slug del índice
+    const work = works[0];
     this.router.navigate(['/obra', cat, work], { replaceUrl: true });
   }
 }
