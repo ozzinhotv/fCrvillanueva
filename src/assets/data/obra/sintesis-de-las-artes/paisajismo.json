@@ -5,7 +5,7 @@
     "image": "assets/img/hero/croquisCaoma-1.png",
     "title": "Síntesis de las Artes",
     "subtitle": "Paisajismo",
-    "overlayColor": "bg-blue-600",
+    "overlayColor": "bg-blue-300",
     "pt": "pt-24"
   },
   "introHtml": "<p>El Paisajismo es una pieza clave de la Síntesis de las Artes. Aquí puedes colocar 2–4 párrafos con el contexto histórico y decisiones de diseño.</p><p>Este contenido vive en este archivo para editar rápido sin tocar código.</p>",

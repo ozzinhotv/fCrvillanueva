@@ -15,11 +15,10 @@
       <!-- LINKS DESKTOP -->
       <ul class="hidden md:flex items-center gap-8">
         <!-- Vida -->
-        <li>
-          <a routerLink="/vida"
-            routerLinkActive="text-red-500"
-            [routerLinkActiveOptions]="{ exact: true }"
-            class="hover:text-red-500 transition-colors">Vida
+        <li routerLinkActive="text-red-500" [routerLinkActiveOptions]="{ exact: false }">
+          <a [routerLink]="['/vida']"
+            class="hover:text-red-500 transition-colors">
+            Vida
           </a>
         </li>
 
@@ -62,7 +61,21 @@
     <div class="hidden md:block overflow-hidden border-t border-white/10 max-h-0 opacity-0 -translate-y-1
                 transition-all duration-200 ease-out origin-top group-hover:max-h-80 group-hover:opacity-100 group-hover:translate-y-0">
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-2 py-3">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-2 py-3">
+        <!-- Vida -->
+        <div>
+          <div class="px-1 text-sm font-medium text-white/80 mb-2">Vida</div>
+          <ul class="flex flex-col">
+            <li *ngFor="let p of vidaPeriods">
+              <a [routerLink]="['/vida']"
+                 [queryParams]="{ period: p.slug }"
+                 class="block rounded-md px-3 py-2 text-white/90 hover:text-white hover:bg-white/10">
+                {{ p.label }}
+              </a>
+            </li>
+          </ul>
+        </div>
+
         <!-- Obra -->
         <div>
           <div class="px-1 text-sm font-medium text-white/80 mb-2">Obra</div>
@@ -115,7 +128,22 @@
   </div>
 
   <nav class="space-y-1">
-    <a routerLink="/vida" class="block rounded-lg px-3 py-2 text-white/95 hover:text-white hover:bg-white/10" (click)="close()">Vida</a>
+    <!-- Vida -->
+    <div>
+      <a [routerLink]="['/vida']"
+         class="block rounded-lg px-3 py-2 text-white/95 hover:text-white hover:bg-white/10"
+         (click)="close()">Vida</a>
+      <ul class="mt-1 space-y-1 px-2">
+        <li *ngFor="let p of vidaPeriods">
+          <a [routerLink]="['/vida']"
+             [queryParams]="{ period: p.slug }"
+             class="block rounded-md px-3 py-2 text-white/90 hover:text-white hover:bg-white/10"
+             (click)="close()">
+            {{ p.label }}
+          </a>
+        </li>
+      </ul>
+    </div>
 
     <!-- Obra -->
     <div>

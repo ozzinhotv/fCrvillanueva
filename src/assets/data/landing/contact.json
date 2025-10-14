@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "title": "Nosotros",
+      "type": "list",
+      "lines": [
+        "Paulina Villanueva - Directora",
+        "Adriana Villanueva - Subdirectora",
+        "Cecilia Castrillo - Asistente de Dirección"
+      ]
+    },
+    {
+      "title": "Email",
+      "type": "rich",
+      "text": "Para consultar cualquier información, envíanos un correo y con gusto te atenderemos.",
+      "email": "fcmvillanueva@gmail.com"
+    }
+  ]
+}

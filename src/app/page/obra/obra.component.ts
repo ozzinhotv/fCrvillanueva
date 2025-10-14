@@ -32,9 +32,7 @@ export class ObraComponent {
 
   private loadData(cat: string, work: string) {
     const t0 = performance.now();
-    console.log('[Obra] cargando desde assets ->', { cat, work });
     this.obraSvc.getObra(cat, work).subscribe(res => {
-      console.log('[Obra] respuesta JSON', { ms: Math.round(performance.now() - t0), res });
       if (res) { this.data.set(res); return; }
 
       // Fallback visible si no existe el JSON

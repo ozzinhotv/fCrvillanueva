@@ -1,0 +1,32 @@
+<section id="about" class="py-20 px-6 lg:px-12">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid items-center gap-10 md:gap-16 md:grid-cols-2">
+      <app-img [image]="image" [alt]="alt" />
+
+      <div class="max-w-2xl">
+        <h1 class="tracking-tight text-slate-900 leading-[1.05] text-5xl md:text-6xl lg:text-7xl">
+          <span class="block">{{ titleLine1 }}</span>
+          <span class="block text-red-600">{{ titleLine2 }}</span>
+        </h1>
+
+        <div class="mt-6 space-y-5 text-gray-700 text-lg md:text-xl leading-8">
+          <p *ngFor="let p of paragraphs">{{ p }}</p>
+        </div>
+
+        <div class="mt-10">
+          <!-- Usa routerLink para rutas internas, href si es externo -->
+          <a *ngIf="isInternal(ctaLink); else extCta"
+             [routerLink]="ctaLink"
+             class="btn btn-lg rounded-full px-10 btn-wide">
+            {{ ctaLabel }}
+          </a>
+          <ng-template #extCta>
+            <a [href]="ctaLink" class="btn btn-lg rounded-full px-10 btn-wide">
+              {{ ctaLabel }}
+            </a>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

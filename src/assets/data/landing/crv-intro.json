@@ -1,0 +1,12 @@
+{
+  "image": "assets/img/landing/CRVsilladelDiablo.jpg",
+  "alt": "Silla del Diablo",
+  "titleLine1": "Carlos Raúl",
+  "titleLine2": "Villanueva",
+  "paragraphs": [
+    "Arquitecto venezolano formado en París, Carlos Raúl Villanueva puso su talento al servicio del país desde 1928, entendiendo la arquitectura como un hecho social.",
+    "Desde la gestión pública impulsó vivienda, educación y ciudad. Su obra clave, la Ciudad Universitaria de Caracas, integró arte y arquitectura y consolidó un lenguaje moderno propio.",
+    "Maestro y figura pública, unió práctica, docencia y urbanismo. Para leer la biografía completa, presiona el botón de abajo."
+  ],
+  "cta": { "label": "Conocer más", "link": "/vida" }
+}

@@ -5,7 +5,7 @@
     "image": "assets/img/hero/croquisCaoma-1.png",
     "title": "Vivienda Pública",
     "subtitle": "23 de Enero",
-    "overlayColor": "bg-green-600",
+    "overlayColor": "bg-green-300",
     "pt": "pt-24"
   },
   "introHtml": "<p>Descripción breve de la 23 de Enero…</p>",

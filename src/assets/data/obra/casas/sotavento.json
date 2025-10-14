@@ -5,7 +5,7 @@
     "image": "assets/img/hero/croquisCaoma-1.png",
     "title": "Casas",
     "subtitle": "Sotavento",
-    "overlayColor": "bg-red-60",
+    "overlayColor": "bg-grey-60",
     "pt": "pt-24"
   },
   "introHtml": "<p>Descripción breve de la Sotavento…</p>",

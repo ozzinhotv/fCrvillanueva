@@ -5,7 +5,7 @@
     "image": "assets/img/hero/croquisCaoma-1.png",
     "title": "Ciudad Universitaria",
     "subtitle": "Facultad de Ingeniería",
-    "overlayColor": "bg-red-600",
+    "overlayColor": "bg-red-300",
     "pt": "pt-24"
   },
   "introHtml": "<p>Descripción breve de la Facultad de Ingeniería…</p>",

@@ -5,7 +5,7 @@
     "image": "assets/img/hero/croquisCaoma-1.png",
     "title": "Hospitales",
     "subtitle": "Clinica 2",
-    "overlayColor": "bg-yellow-300",
+    "overlayColor": "bg-yellow-600",
     "pt": "pt-24"
   },
   "introHtml": "<p>Descripción breve de la Clinica 2…</p>",

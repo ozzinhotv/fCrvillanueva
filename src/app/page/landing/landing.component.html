@@ -1,10 +1,35 @@
-    <app-hero
-      image="assets/img/hero/croquisCaoma-1.png"
-      title="Fundación Villanueva"
-      subtitle="Legado de un arquitecto"
-      overlayColor="bg-black/20"
-      pt="pt-24">
-    </app-hero>
-    <crv-intro/>
-    <fv-intro/>
-    <contact-section/>
+<app-hero
+  image="assets/img/hero/croquisCaoma-1.png"
+  title="Fundación Villanueva"
+  subtitle="Legado de un arquitecto"
+  overlayColor="bg-black/20"
+  pt="pt-24">
+</app-hero>
+<ng-container *ngIf="crv$ | async as crv">
+  <crv-intro
+    [image]="crv.image"
+    [alt]="crv.alt"
+    [titleLine1]="crv.titleLine1"
+    [titleLine2]="crv.titleLine2"
+    [paragraphs]="crv.paragraphs"
+    [ctaLink]="crv.cta.link"
+    [ctaLabel]="crv.cta.label"
+    />
+  </ng-container>
+<ng-container *ngIf="fv$ | async as fv">
+  <fv-intro
+    [image]="fv.image"
+    [alt]="fv.alt"
+    [titleLine1]="fv.titleLine1"
+    [titleLine2]="fv.titleLine2"
+    [paragraphs]="fv.paragraphs"
+  />
+</ng-container>
+<ng-container *ngIf="contact$ | async as contact">
+  <contact-section [items]="(contact$ | async)?.items ?? []"/>
+</ng-container>
+
+
+
+
+
