@@ -1,38 +1,40 @@
-<footer class="bg-black text-white border-t border-white/10 w-full">
-  <div
-    class="mx-auto px-6 lg:px-12 py-10
-           grid grid-cols-1 md:grid-cols-2 gap-8 items-center md:items-start">
+<footer class="relative z-40">
+  <!-- Capa de fondo (suave) -->
+  <div class="absolute inset-0 bg-gradient-to-t from-neutral-900/60 via-neutral-900/40 to-transparent"></div>
 
-    <!-- Marca -->
-    <nav class="text-center md:text-left">
-      <h1
-        class="font-bold transition-colors duration-200 hover:text-red-600
-               text-3xl sm:text-4xl md:text-5xl">
-        Fundación Villanueva
-      </h1>
-    </nav>
+  <!-- Tarjeta glass -->
+  <div class="relative mx-auto w-full max-w-7xl px-6 lg:px-12 py-10
+              rounded-t-2xl border border-white/10 bg-neutral-900/35
+              backdrop-blur-xl shadow-2xl shadow-black/30">
 
-    <!-- Contacto -->
-    <nav class="text-center md:text-right md:mr-12">
-      <h3
-        class="font-bold transition-colors duration-200 hover:text-red-600
-               text-2xl sm:text-3xl md:text-4xl">
-        Contacto
-      </h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center md:items-start">
+      <!-- Marca -->
+      <div class="text-center md:text-left">
+        <a routerLink="/" class="inline-flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 rounded-lg">
+          <img src="assets/img/shared/navbar/logoblack.jpg.gif" alt="Fundación Villanueva" class="h-9 w-auto opacity-90 group-hover:opacity-100 transition" />
+          <span class="sr-only">Inicio</span>
+        </a>
+        <h1 class="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-white/95">
+          Fundación Villanueva
+        </h1>
+        <p class="mt-2 text-sm text-white/60 max-w-sm">
+          Patrimonio, vida y obra de Carlos&nbsp;Raúl&nbsp;Villanueva.
+        </p>
+      </div>
+      <!-- Contacto -->
+      <nav class="text-center md:text-right md:mr-2">
+        <h3 class="text-xl sm:text-2xl font-semibold text-white/90">Contacto</h3>
 
-      <a
-         href="mailto:fcmvillanueva@gmail.com"
-         class="block mt-3 font-semibold transition-colors duration-200 hover:text-red-600
-                text-lg sm:text-xl md:text-2xl">
-        fcmvillanueva&#64;gmail.com
-      </a>
+        <a href="mailto:fcmvillanueva@gmail.com"
+           class="block mt-3 font-medium text-white/90 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 rounded">
+          fcmvillanueva&#64;gmail.com
+        </a>
 
-      <a
-         href="tel:+582127314428"
-         class="block font-semibold transition-colors duration-200 hover:text-red-600
-                text-lg sm:text-xl md:text-2xl">
-        +58 212 7314428
-      </a>
-    </nav>
+        <a href="tel:+582127314428"
+           class="block mt-1 font-medium text-white/90 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 rounded">
+          +58&nbsp;212&nbsp;7314428
+        </a>
+      </nav>
+    </div>
   </div>
 </footer>
