@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CardHeaderComponent } from './card-header/card-header.component';
 import { CardTextComponent } from './card-text/card-text.component';
 import { CardImageComponent } from './card-img/card-img.component';
-import { DropdownIconComponent } from "../../../../../shared/ui/dropdown-icon/dropdown-icon.component";
+import { DropdownIconComponent } from "../../../../../shared/ui/icon/dropdown-icon/dropdown-icon.component";
 
 @Component({
   selector: 'vida-card',

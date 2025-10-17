@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { DropdownIconComponent } from '../../../../shared/ui/dropdown-icon/dropdown-icon.component';
+import { DropdownIconComponent } from '../../../../shared/ui/icon/dropdown-icon/dropdown-icon.component';
 
 type ItemType = 'list' | 'rich';
 

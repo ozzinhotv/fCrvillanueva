@@ -7,8 +7,8 @@
   [title]="d.hero.title"
   [subtitle]="d.hero.subtitle"
   [overlayColor]="d.hero.overlayColor"
-  [pt]="d.hero.pt">
-</app-hero>
+  [pt]="d.hero.pt"
+/>
 
 <subnav-obra class="block"/>
 <!-- Títulos bajo el hero -->
@@ -19,11 +19,22 @@
 
 
 <!-- Texto -->
-<obra-text-block *ngIf="data() as d" [contentHtml]="d.introHtml"></obra-text-block>
+<obra-text-block *ngIf="data() as d" [contentHtml]="d.introHtml"/>
 
 <!-- Galerías -->
 <ng-container *ngIf="data() as d">
   <ng-container *ngFor="let g of d.galleries">
-    <obra-gallery [gallery]="g"></obra-gallery>
+    <obra-gallery [gallery]="g"/>
   </ng-container>
 </ng-container>
+
+<gallery-lightbox
+  [item]="lb.item()"
+  [visible]="lb.visible()"
+  (visibleChange)="onLbVisibleChange($event)"
+  (prev)="lb.prev()"
+  (next)="lb.next()"
+/>
+
+
+

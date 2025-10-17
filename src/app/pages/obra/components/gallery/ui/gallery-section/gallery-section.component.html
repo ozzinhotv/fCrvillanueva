@@ -1,0 +1,29 @@
+<section class="select-none border border-white/10 rounded-2xl overflow-hidden bg-neutral-900/30 backdrop-blur-md"
+         (mouseenter)="onEnter()" (mouseleave)="onLeave()">
+
+  <!-- Header -->
+  <button type="button"
+          class="w-full flex items-center justify-between px-4 py-3 text-left
+                 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-white/30"
+          (click)="toggle()"
+          [attr.aria-expanded]="expanded">
+    <span class="text-base md:text-lg font-semibold">{{ title }}</span>
+    <dropdown-icon/>
+  </button>
+
+  <!-- Contenido -->
+  <div #content class="overflow-hidden transition-[max-height] duration-300 ease-out"
+       [style.maxHeight.px]="maxH">
+
+    <div class="container mx-auto px-4 pb-4">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <button type="button"
+                class="text-left cursor-zoom-in"
+                *ngFor="let it of items; let i = index"
+                (click)="openLightbox(it)">
+          <gallery-card [item]="it"></gallery-card>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

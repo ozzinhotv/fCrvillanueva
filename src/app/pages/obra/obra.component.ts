@@ -9,16 +9,19 @@ import { SubnavObraComponent } from './components/subnav/subnav-obra.component';
 
 import { ObraData } from './interfaces/obra-data.interface';
 import { ObraDataService } from './service/obra-data.service';
+import { GalleryLightboxComponent } from './components/gallery/ui/gallery-lightbox/gallery-lightbox.component';
+import { LightboxService } from './service/lightbox.service';
 
 @Component({
   selector: 'app-obra',
   standalone: true,
-  imports: [CommonModule, HeroComponent, TextBlockComponent, GalleryComponent, SubnavObraComponent],
+  imports: [CommonModule, HeroComponent, TextBlockComponent, GalleryComponent, SubnavObraComponent, GalleryLightboxComponent],
   templateUrl: './obra.component.html',
 })
 export class ObraComponent {
   private route = inject(ActivatedRoute);
   private obraSvc = inject(ObraDataService);
+  lb = inject(LightboxService);
 
   data = signal<ObraData | null>(null);
 
@@ -51,4 +54,7 @@ export class ObraComponent {
       });
     });
   }
+
+  onLbVisibleChange(v: boolean) { if (!v) this.lb.close(); }
+
 }
