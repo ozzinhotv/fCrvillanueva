@@ -13,22 +13,18 @@
     {
       "title": "Galería principal",
       "items": [
-        { "id": "am-01", "title": "Croquis",          "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-01", "title": "Croquis",          "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-03", "title": "Obra gruesa",      "category": "construction", "placeholder": "bg-gradient-to-br from-amber-400 to-orange-500" },
-        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-gradient-to-br from-amber-400 to-orange-500" },
-        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-gradient-to-br from-amber-400 to-orange-500" },
-        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-gradient-to-br from-amber-400 to-orange-500" },
-        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-400 to-teal-400" },
-        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-400 to-teal-400" },
-        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-400 to-teal-400" },
-        { "id": "am-06", "title": "Butacas",          "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-400 to-teal-400" }
+        { "id": "bn-01", "title": "Planta general",            "category": "plans",        "placeholder": "bg-gradient-to-br from-slate-200 via-sky-400 to-indigo-600" },
+        { "id": "bn-02", "title": "Sección transversal",        "category": "plans",        "placeholder": "bg-gradient-to-br from-gray-100 via-blue-300 to-violet-500" },
+        { "id": "bn-03", "title": "Axonométrica",               "category": "plans",        "placeholder": "bg-gradient-to-br from-zinc-300 via-cyan-400 to-blue-700" },
+        { "id": "bn-04", "title": "Diagrama de circulaciones", "category": "plans",        "placeholder": "bg-gradient-to-br from-slate-500 via-indigo-500 to-sky-100" },
+        { "id": "bn-05", "title": "Armado de columnas",        "category": "construction", "placeholder": "bg-gradient-to-br from-stone-300 via-amber-500 to-orange-800" },
+        { "id": "bn-06", "title": "Vaciado de losa",           "category": "construction", "placeholder": "bg-gradient-to-br from-stone-500 via-yellow-700 to-amber-900" },
+        { "id": "bn-07", "title": "Andamiaje perimetral",      "category": "construction", "placeholder": "bg-gradient-to-br from-neutral-700 via-orange-700 to-red-500" },
+        { "id": "bn-08", "title": "Sellado de juntas",         "category": "construction", "placeholder": "bg-gradient-to-br from-stone-900 via-amber-300 to-amber-100" },
+        { "id": "bn-09", "title": "Entrega de obra",           "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600" },
+        { "id": "bn-10", "title": "Plaza exterior",            "category": "completed",    "placeholder": "bg-gradient-to-br from-teal-300 via-emerald-500 to-lime-600" },
+        { "id": "bn-11", "title": "Iluminación interior",      "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-600 via-teal-600 to-sky-700" },
+        { "id": "bn-12", "title": "Recorrido final",           "category": "completed",    "placeholder": "bg-gradient-to-br from-teal-700 via-emerald-800 to-teal-900" }
       ]
     }
   ]

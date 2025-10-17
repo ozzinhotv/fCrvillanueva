@@ -13,18 +13,18 @@
     {
       "title": "Galería principal",
       "items": [
-        { "id": "am-01", "title": "Croquis",          "category": "plans",        "placeholder": "bg-sky-300" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-sky-300" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-sky-300" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-sky-300" },
-        { "id": "am-03", "title": "Obra gruesa",      "category": "construction", "placeholder": "bg-amber-300" },
-        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-amber-300" },
-        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-amber-300" },
-        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-amber-300" },
-        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-emerald-300" },
-        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-emerald-300" },
-        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-emerald-300" },
-        { "id": "am-06", "title": "Butacas",          "category": "completed",    "placeholder": "bg-emerald-300" }
+        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-sky-500 to-indigo-500" },
+        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-sky-600 to-indigo-600" },
+        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-sky-700 to-indigo-700" },
+        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-sky-800 to-indigo-800" },
+        { "id": "am-03", "title": "Obra gruesa",      "category": "construction", "placeholder": "bg-gradient-to-br from-amber-400 to-orange-500" },
+        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-gradient-to-br from-amber-500 to-orange-600" },
+        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-gradient-to-br from-amber-600 to-orange-700" },
+        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-gradient-to-br from-amber-700 to-orange-800" },
+        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-400 to-teal-400" },
+        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-500 to-teal-500" },
+        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-600 to-teal-600" },
+        { "id": "am-06", "title": "Butacas",          "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-700 to-teal-700" }
       ]
     }
   ]

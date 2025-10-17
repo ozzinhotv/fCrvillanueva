@@ -1,4 +1,3 @@
-// src/app/pages/obra/components/gallery/ui/lightbox.service.ts
 import { Injectable, signal, computed } from '@angular/core';
 import { GalleryItem } from '../interfaces/gallery-item.interface';
 
@@ -16,14 +15,12 @@ export class LightboxService {
   });
 
   open(item: GalleryItem) {
-    // fallback: abrir solo ese item
     this._list.set([item]);
     this._index.set(0);
     this._visible.set(true);
     document.body.style.overflow = 'hidden';
   }
 
-  /** Úsalo cuando abras desde una sección: pásale TODA la lista y el índice */
   openWith(list: ReadonlyArray<GalleryItem>, index: number) {
     this._list.set(list.slice());   // copia
     this._index.set(index);

@@ -13,18 +13,20 @@
     {
       "title": "Galería principal",
       "items": [
-        { "id": "am-01", "title": "Croquis",          "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-02", "title": "Planta auditorio", "category": "plans",        "placeholder": "bg-gradient-to-br from-cyan-200 via-sky-400 to-indigo-500" },
-        { "id": "am-03", "title": "Obra gruesa",      "category": "construction", "placeholder": "bg-gradient-to-br from-amber-400 to-orange-500" },
-        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-gradient-to-br from-amber-400 to-orange-500" },
-        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-gradient-to-br from-amber-400 to-orange-500" },
-        { "id": "am-04", "title": "Cimbra techo",     "category": "construction", "placeholder": "bg-gradient-to-br from-amber-400 to-orange-500" },
-        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-400 to-teal-400" },
-        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-400 to-teal-400" },
-        { "id": "am-05", "title": "Vista final",      "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-400 to-teal-400" },
-        { "id": "am-06", "title": "Butacas",          "category": "completed",    "placeholder": "bg-gradient-to-br from-emerald-400 to-teal-400" }
+        { "id": "dv-01", "title": "Planta de audiencias", "category": "plans", "placeholder": "bg-gradient-to-br from-slate-200 via-sky-300 to-indigo-500" },
+        { "id": "dv-02", "title": "Corte constructivo", "category": "plans", "placeholder": "bg-gradient-to-br from-violet-200 via-indigo-400 to-fuchsia-600" },
+        { "id": "dv-03", "title": "Alzado posterior", "category": "plans", "placeholder": "bg-gradient-to-br from-gray-100 via-cyan-300 to-teal-600" },
+        { "id": "dv-04", "title": "Esquema de accesos", "category": "plans", "placeholder": "bg-gradient-to-br from-zinc-300 via-blue-500 to-purple-700" },
+
+        { "id": "dv-05", "title": "Armado de vigas", "category": "construction", "placeholder": "bg-gradient-to-br from-stone-200 via-amber-400 to-orange-700" },
+        { "id": "dv-06", "title": "Impermeabilización", "category": "construction", "placeholder": "bg-gradient-to-br from-yellow-200 via-amber-500 to-red-500" },
+        { "id": "dv-07", "title": "Fijación de barandas", "category": "construction", "placeholder": "bg-gradient-to-br from-neutral-700 via-orange-600 to-rose-600" },
+        { "id": "dv-08", "title": "Pintura de fachadas", "category": "construction", "placeholder": "bg-gradient-to-br from-stone-900 via-amber-300 to-yellow-100" },
+
+        { "id": "dv-09", "title": "Hall principal", "category": "completed", "placeholder": "bg-gradient-to-br from-emerald-300 via-teal-400 to-cyan-600" },
+        { "id": "dv-10", "title": "Cubierta verde", "category": "completed", "placeholder": "bg-gradient-to-br from-lime-200 via-emerald-500 to-teal-700" },
+        { "id": "dv-11", "title": "Auditorio operativo", "category": "completed", "placeholder": "bg-gradient-to-br from-green-300 via-emerald-600 to-cyan-800" },
+        { "id": "dv-12", "title": "Conjunto inaugurado", "category": "completed", "placeholder": "bg-gradient-to-br from-teal-600 via-emerald-700 to-green-900" }
       ]
     }
   ]

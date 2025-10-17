@@ -25,15 +25,12 @@ function buildPath(category: string, work: string): string {
   const cat = FOLDERS[toKebab(category)];
   const obra = toKebab(work);
   if (!cat) throw new Error(`Categoría desconocida: ${category}`);
-  // usamos prefijo absoluto como en “archivo”
   return `/assets/data/obra/${cat}/${obra}.json`;
 }
 
 @Injectable({ providedIn: 'root' })
 export class ObraDataService {
   constructor(private http: HttpClient) {}
-
-  /** Carga una obra desde /assets/data/obra/{categoria}/{obra}.json */
   getObra(category: string, work: string): Observable<ObraData | null> {
     const url = buildPath(category, work);
     return this.http.get<ObraData>(url).pipe(

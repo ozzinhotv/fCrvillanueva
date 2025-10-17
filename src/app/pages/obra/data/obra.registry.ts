@@ -7,7 +7,6 @@ export const NAV_INDEX: Record<string, string[]> = {
   'vivienda-publica': ['23-de-enero', 'urbanizacion-el-silencio'],
 };
 
-// Etiquetas para la UI (como antes)
 export const CATEGORY_LABELS: Record<string, string> = {
   'ciudad-universitaria': 'Ciudad Universitaria',
   'vivienda-publica': 'Vivienda Pública',
