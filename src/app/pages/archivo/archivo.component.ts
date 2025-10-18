@@ -8,7 +8,7 @@ import { ArchivoFilterComponent } from './components/ui/archivo-filter/archivo-f
 import { ArchivoFeedComponent } from './components/ui/archivo-feed/archivo-feed.component';
 import { ReaderModalComponent } from './components/layout/reader-modal/reader-modal.component';
 
-import { ArchivoState, Cat } from './data/archivo.state';
+import { ArchivoState, Cat } from './state/archivo.state';
 import { ArchivoItem } from './interface/archivo.interface';
 
 @Component({

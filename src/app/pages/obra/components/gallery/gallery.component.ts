@@ -21,7 +21,6 @@ export class GalleryComponent {
   construction = computed(() => this.items().filter(i => i.category === 'construction'));
   completed    = computed(() => this.items().filter(i => i.category === 'completed'));
 
-  // Solo una abierta a la vez
   open = signal<Cat | null>(null);
 
   setOpen(section: Cat, isOpen: boolean) {

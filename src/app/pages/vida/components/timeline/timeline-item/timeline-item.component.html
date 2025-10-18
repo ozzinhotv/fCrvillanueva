@@ -1,18 +1,18 @@
-<div class="relative pl-6">
-  <!-- rail gris vertical -->
-  <div class="absolute left-2 top-0 bottom-0 w-[2px] bg-neutral-200"></div>
-
-  <!-- punto -->
-  <span class="absolute left-[6px] top-4 h-3 w-3 rounded-full bg-white ring-2 ring-neutral-300">
-    <span class="block h-2 w-2 rounded-full bg-red-500 translate-x-[3px] translate-y-[3px]"></span>
-  </span>
-
-  <!-- card -->
-  <vida-card
-    [year]="item?.year"
-    [title]="item?.title"
-    [text]="item?.text"
-    [placeholderColor]="item?.placeholderColor || '#e5e7eb'"
-    [imageSide]="item?.imageSide || 'right'">
-  </vida-card>
+<div class="relative grid grid-cols-1 md:grid-cols-2 md:gap-x-24">
+  <div class="pl-6 md:pl-0 relative"
+       [ngClass]="{
+         'md:col-start-1 md:pr-12 md:text-right': side === 'left',
+         'md:col-start-2 md:pl-12': side === 'right'
+       }">
+    <div data-card (click)="toggle()">
+      <vida-card
+        [year]="item?.year"
+        [title]="item?.title"
+        [text]="item?.text"
+        [placeholderColor]="item?.placeholderColor || '#e5e7eb'"
+        [imageSide]="item?.imageSide || 'right'"
+      />
+    </div>
+  </div>
+  <div class="hidden md:block"></div>
 </div>

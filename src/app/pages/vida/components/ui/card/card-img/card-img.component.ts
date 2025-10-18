@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './card-img.component.html',
 })
 export class CardImageComponent {
-  @Input() color = '#e5e7eb';        // placeholder
-  @Input() aspect = 'aspect-[4/3]';  // tailwind
+  @Input() color = 'bg-red-600';
+  @Input() aspect = 'aspect-[4/3]';
   @Input() rounded = 'rounded-xl';
 }

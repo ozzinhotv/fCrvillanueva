@@ -37,8 +37,6 @@ export class ObraComponent {
     const t0 = performance.now();
     this.obraSvc.getObra(cat, work).subscribe(res => {
       if (res) { this.data.set(res); return; }
-
-      // Fallback visible si no existe el JSON
       this.data.set({
         category: 'Obra no encontrada',
         work: `${cat}/${work}`,

@@ -1,0 +1,17 @@
+<div class="absolute" [ngStyle]="{ top: top + 'px', bottom: bottom + 'px' }">
+  <div class="absolute rail-dot text-neutral-300"
+       [ngStyle]="{ left: mobileLeftA + 'px', width: thickness + 'px', top: 0, bottom: 0 }"
+       class="md:left-1/2 md:[transform:translateX(calc(-1*var(--off)))]" style="--off: {{centerOffset}}px"></div>
+
+  <div class="absolute rail-dot text-neutral-300"
+       [ngStyle]="{ left: mobileLeftB + 'px', width: thickness + 'px', top: 0, bottom: 0 }"
+       class="md:left-1/2 md:[transform:translateX(var(--off))]" style="--off: {{centerOffset}}px"></div>
+
+  <div *ngIf="segment" class="absolute segment bg-red-600"
+       [ngStyle]="{ left: mobileLeftA + 'px', width: thickness + 'px', top: segment.top + 'px', height: segment.height + 'px', opacity: 1 }"
+       class="md:left-1/2 md:[transform:translateX(calc(-1*var(--off)))]" style="--off: {{centerOffset}}px"></div>
+
+  <div *ngIf="segment" class="absolute segment bg-red-600"
+       [ngStyle]="{ left: mobileLeftB + 'px', width: thickness + 'px', top: segment.top + 'px', height: segment.height + 'px', opacity: 1 }"
+       class="md:left-1/2 md:[transform:translateX(var(--off))]" style="--off: {{centerOffset}}px"></div>
+</div>

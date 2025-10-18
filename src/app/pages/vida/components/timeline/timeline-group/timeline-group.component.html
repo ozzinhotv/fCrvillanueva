@@ -1,11 +1,13 @@
-<section class="rounded-xl p-4 md:p-6" [ngClass]="bgClass">
-  <header class="mb-4">
-    <h3 class="text-sm uppercase tracking-wide text-neutral-500">{{ label }}</h3>
+<section class="relative rounded-2xl p-4 md:p-8" [ngClass]="bgClass">
+  <header class="mb-6 md:mb-8">
+    <h3 class="text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-neutral-500/80">{{ label }}</h3>
   </header>
 
-  <ol class="space-y-4">
-    <li *ngFor="let it of items">
-      <timeline-item [item]="it"/>
+  <timeline-rail [segment]="active" [top]="80" [bottom]="24" [thickness]="2" [centerOffset]="28" [mobileLeftA]="14" [mobileLeftB]="28"></timeline-rail>
+
+  <ol class="relative space-y-8 md:space-y-14">
+    <li *ngFor="let it of items; index as i">
+      <timeline-item [item]="it" [side]="i % 2 === 0 ? 'left' : 'right'" (segmentChange)="active=$event"/>
     </li>
   </ol>
 </section>

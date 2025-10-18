@@ -1,18 +1,13 @@
-<!-- Subnav: grupo para hover en desktop, tarjeta compacta en móvil -->
 <nav
   class="group mt-4
          rounded-xl  text-white border border-white/10
            bg-neutral-900/30 backdrop-blur-md shadow-lg shadow-black/10
          w-full md:container md:mx-auto md:px-4
          max-md:w-[92%] max-md:max-w-sm max-md:mx-auto">
-
-  <!-- Header -->
   <div class="flex items-center justify-between px-3 py-3">
     <div class="text-sm md:text-base font-medium text-white/95 truncate">
       {{ categoryLabel() }} / <span class="text-white/80">{{ currentWorkLabel() }}</span>
     </div>
-
-    <!-- Botón SOLO en móvil -->
     <button
       type="button"
       class="md:hidden inline-flex items-center justify-center rounded-lg p-2
@@ -31,8 +26,6 @@
       <span class="sr-only">Mostrar obras de {{ categoryLabel() }}</span>
     </button>
   </div>
-
-  <!-- PANEL MÓVIL (columna vertical, tarjeta estrecha) -->
   <div
     id="obra-subnav-panel-mobile"
     class="md:hidden overflow-hidden border-t border-white/10
@@ -40,7 +33,6 @@
     [ngClass]="isOpen()
       ? 'max-h-80 opacity-100 translate-y-0'
       : 'max-h-0 opacity-0 -translate-y-1'">
-
     <div class="px-3 pb-4 pt-2">
       <ul class="flex flex-col gap-1">
         <li *ngFor="let w of works()">
@@ -57,16 +49,12 @@
       </ul>
     </div>
   </div>
-
-  <!-- PANEL DESKTOP (se expande al hover como el navbar) -->
   <div
     class="hidden md:block overflow-hidden border-t border-white/10
            max-h-0 opacity-0 -translate-y-1
            transition-all duration-300 ease-out origin-top
            group-hover:max-h-64 group-hover:opacity-100 group-hover:translate-y-0">
-
     <div class="px-3 pb-4 pt-2">
-      <!-- puedes usar horizontal chips o columna, dejo chips para variedad -->
       <div
         class="flex items-center gap-2 overflow-x-auto
                scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">

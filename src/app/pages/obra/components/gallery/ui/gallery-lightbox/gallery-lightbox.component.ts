@@ -38,7 +38,7 @@ export class GalleryLightboxComponent implements OnChanges, OnDestroy {
 
   placeholderClass(it: GalleryItem | null): string {
     if (!it) return 'bg-neutral-300';
-    if (it.placeholder) return it.placeholder; // usa el que pusiste en el JSON
+    if (it.placeholder) return it.placeholder;
     switch (it.category) {
       case 'plans':        return 'bg-gradient-to-br from-sky-300 via-indigo-400 to-blue-600';
       case 'construction': return 'bg-gradient-to-br from-amber-300 via-orange-400 to-rose-500';

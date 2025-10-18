@@ -22,7 +22,7 @@ export class LightboxService {
   }
 
   openWith(list: ReadonlyArray<GalleryItem>, index: number) {
-    this._list.set(list.slice());   // copia
+    this._list.set(list.slice());
     this._index.set(index);
     this._visible.set(true);
     document.body.style.overflow = 'hidden';
