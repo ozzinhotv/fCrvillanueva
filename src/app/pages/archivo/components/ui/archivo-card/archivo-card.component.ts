@@ -4,9 +4,10 @@ import { ArchivoItem } from '../../../interface/archivo.interface';
 
 @Component({
   selector: 'archivo-card',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './archivo-card.component.html',
 })
 export class ArchivoCardComponent {
-  @Input({  required: true }) item!: ArchivoItem;
+  @Input({ required: true }) item!: ArchivoItem;
 }

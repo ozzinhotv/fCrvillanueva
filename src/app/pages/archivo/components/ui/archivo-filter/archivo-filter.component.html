@@ -1,13 +1,18 @@
-<div class="mb-6 flex gap-2 overflow-x-auto no-scrollbar">
-  <button
-    *ngFor="let c of categories"
-    type="button"
-    (click)="select(c.key)"
-    class="px-4 py-2 rounded-full text-sm font-medium border transition
-           border-white/10 bg-white/5 hover:bg-white/10
-           aria-pressed:shadow-inner"
-    [class.bg-red-600]="selected === c.key"
-    [attr.aria-pressed]="selected === c.key">
-    {{ c.label }}
-  </button>
+<div class="mb-8">
+  <div class="text-sm font-medium text-black/60 mb-3">Todos</div>
+  <div class="flex flex-wrap gap-2">
+    <button
+      *ngFor="let o of options"
+      type="button"
+      (click)="select(o.key)"
+      class="relative rounded-full px-4 py-2 text-sm transition
+             border backdrop-blur hover:shadow-sm
+             focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500/50"
+      [ngClass]="isActive(o.key)
+        ? 'border-red-500/30 bg-white text-red-700'
+        : 'border-black/20 bg-white/70 text-black/80'"
+    >
+      {{ o.label }}
+    </button>
+  </div>
 </div>

@@ -1,24 +1,43 @@
-<article class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition">
-  <img *ngIf="item.coverImage" [src]="item.coverImage" alt="" class="w-full h-44 object-cover">
-  <div class="p-4 space-y-2">
-    <div class="text-xs uppercase tracking-wide opacity-70">
-      {{ item.category }}
-    </div>
-    <h3 class="text-lg font-semibold leading-snug">
-      {{ item.title }}
-    </h3>
-    <p class="text-sm opacity-85 line-clamp-3">
-      {{ item.summary }}
-    </p>
-    <div class="text-xs text-white/60">
-      {{ item.author }} • {{ item.date | date:'mediumDate' }}
+<article
+  class="relative overflow-hidden rounded-2xl border border-black/10
+         bg-white/60 backdrop-blur-md shadow-sm transition
+         hover:shadow-lg hover:border-black/20"
+>
+  <span class="pointer-events-none absolute -inset-1 rounded-3xl opacity-0
+               transition group-hover:opacity-100" aria-hidden>
+    <span class="absolute inset-0 rounded-3xl blur-2xl opacity-15 bg-red-500/30"></span>
+  </span>
+
+  <div class="relative p-5 space-y-3">
+    <div class="flex items-center gap-2 text-xs uppercase tracking-wide">
+      <span class="rounded-full bg-black/5 px-2 py-0.5 border border-black/10 text-black/60">
+        {{ item.category }}
+      </span>
+      <span class="h-px w-6 bg-black/10"></span>
+      <span class="text-black/50">{{ item.date | date:'mediumDate' }}</span>
     </div>
 
-    <div class="pt-2">
-      <button type="button"
-              class="text-sm underline underline-offset-4 hover:no-underline">
+    <h3 class="text-lg font-semibold leading-snug text-black">
+      <span class="transition group-hover:text-red-600">
+        {{ item.title }}
+      </span>
+    </h3>
+
+    <p class="text-sm text-black/70">
+      {{ item.summary }}
+    </p>
+
+    <div class="flex items-center justify-between pt-1">
+      <span class="text-xs text-black/50">{{ item.author }}</span>
+
+      <span class="inline-flex items-center gap-1 text-sm underline underline-offset-4
+                   decoration-black/30 group-hover:text-red-600 group-hover:decoration-red-500 transition">
         Ver más
-      </button>
+        <svg viewBox="0 0 24 24" class="h-4 w-4">
+          <path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
     </div>
   </div>
 </article>

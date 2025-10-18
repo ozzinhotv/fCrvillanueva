@@ -1,20 +1,35 @@
-<!-- Loader -->
+<!-- Skeleton cristal -->
 <div *ngIf="loading" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-  <div *ngFor="let s of [1,2,3,4,5,6]" class="animate-pulse bg-white/5 border border-white/10 rounded-2xl h-64"></div>
+  <div *ngFor="let s of [1,2,3,4,5,6]"
+       class="h-48 rounded-2xl border border-black/10 bg-white/60 backdrop-blur-md shadow-sm overflow-hidden relative">
+    <div class="absolute inset-0 animate-pulse">
+      <div class="h-full w-full bg-gradient-to-r from-transparent via-black/5 to-transparent"></div>
+    </div>
+    <div class="relative p-5 space-y-3">
+      <div class="h-4 w-24 rounded bg-black/10"></div>
+      <div class="h-5 w-3/4 rounded bg-black/10"></div>
+      <div class="h-5 w-2/3 rounded bg-black/10"></div>
+      <div class="h-4 w-1/2 rounded bg-black/10"></div>
+      <div class="mt-2 h-4 w-16 rounded bg-red-200/60"></div>
+    </div>
+  </div>
 </div>
 
-<!-- Lista -->
-<div *ngIf="!loading && items.length" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+<!-- Lista con fade-in suave -->
+<div *ngIf="!loading && items.length"
+     class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 transition-opacity duration-200">
   <button
     type="button"
-    class="text-left"
-    *ngFor="let it of items; trackBy: trackById"
-    (click)="openItem(it)">
+    class="group text-left will-change-transform transition duration-200 ease-out hover:-translate-y-[1px]"
+    *ngFor="let it of items; trackBy: trackById; let i = index"
+    [style.animationDelay]="(i * 40) + 'ms'"
+    style="animation: fadeUp .24s ease-out both"
+    (click)="openItem(it)"
+  >
     <archivo-card [item]="it"/>
   </button>
 </div>
 
-<!-- Empty -->
-<div *ngIf="!loading && !items.length" class="text-center py-16 opacity-70">
-  No hay resultados para este filtro.
+<div *ngIf="!loading && !items.length" class="text-center py-16 text-black/60">
+  No hay resultados.
 </div>

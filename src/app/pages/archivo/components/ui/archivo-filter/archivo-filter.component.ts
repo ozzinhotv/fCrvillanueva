@@ -1,28 +1,31 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-export type ArchivoCategory = 'todos' | 'articulo' | 'escrito' | 'conferencia';
+export type Cat = 'todos' | 'articulo' | 'escrito' | 'conferencia';
 
 @Component({
   selector: 'archivo-filter',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './archivo-filter.component.html',
 })
 export class ArchivoFilterComponent {
-  @Input() selected: ArchivoCategory = 'todos';
-  @Output() selectedChange = new EventEmitter<ArchivoCategory>();
+  @Input()  selected: Cat = 'todos';
+  @Output() selectedChange = new EventEmitter<Cat>();
 
-  categories: { key: ArchivoCategory; label: string }[] = [
-    { key: 'todos',        label: 'Todos' },
-    { key: 'articulo',     label: 'Artículos' },
-    { key: 'escrito',      label: 'Escritos' },
-    { key: 'conferencia',  label: 'Conferencias' },
+  options: { key: Cat; label: string }[] = [
+    { key: 'todos',       label: 'Todos' },
+    { key: 'articulo',    label: 'Artículos' },
+    { key: 'escrito',     label: 'Escritos' },
+    { key: 'conferencia', label: 'Conferencias' },
   ];
 
-  select(cat: ArchivoCategory) {
+  select(cat: Cat) {
     if (this.selected !== cat) {
       this.selected = cat;
       this.selectedChange.emit(cat);
     }
   }
+
+  isActive(cat: Cat) { return this.selected === cat; }
 }

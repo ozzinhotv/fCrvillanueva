@@ -1,121 +1,100 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router';
-import { HeroComponent } from '../../shared/layout/hero/hero.component';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+
 import { ArchivoDataService } from './services/archivo-data.service';
 import { ArchivoItem } from './interface/archivo.interface';
+
+import { HeroComponent } from '../../shared/layout/hero/hero.component';
 import { ArchivoFilterComponent } from './components/ui/archivo-filter/archivo-filter.component';
 import { ArchivoFeedComponent } from './components/ui/archivo-feed/archivo-feed.component';
 import { ReaderModalComponent } from './components/layout/reader-modal/reader-modal.component';
 
+type Cat = 'todos' | 'articulo' | 'escrito' | 'conferencia';
+
 @Component({
   selector: 'app-archivo',
   standalone: true,
-  imports: [CommonModule, RouterModule, HeroComponent, ArchivoFilterComponent, ArchivoFeedComponent, ReaderModalComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    HeroComponent,
+    ArchivoFilterComponent,
+    ArchivoFeedComponent,
+    ReaderModalComponent,
+  ],
   templateUrl: './archivo.component.html',
 })
 export class ArchivoComponent implements OnInit {
   archivos: ArchivoItem[] = [];
-  visibles: ArchivoItem[] = [];
-  pageSize = 6;
-  currentPage = 0;
-  cargando = true;
+  loading = true;        // carga inicial de JSON
+  filtering = false;     // skeleton al cambiar de filtro
 
-  selectedCategory: 'todos' | 'articulo' | 'escrito' | 'conferencia' = 'todos';
+  // Filtro
+  selectedCategory: Cat = 'todos';
+  get visibleItems(): ArchivoItem[] {
+    if (this.selectedCategory === 'todos') return this.archivos;
+    return this.archivos.filter(a => a.category === this.selectedCategory);
+  }
 
+  // Modal
   readerOpen = false;
   readerItem?: ArchivoItem;
 
-  private hasData = false;
-
   constructor(
-    private dataService: ArchivoDataService,
+    private data: ArchivoDataService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {}
 
-  ngOnInit() {
-    // 1) aplicar ?cat= (si ya hay data, recalcula)
+  ngOnInit(): void {
+    // Sincroniza ?cat=
     this.route.queryParamMap.subscribe(q => {
-      const cat = (q.get('cat') as any) || 'todos';
+      const cat = (q.get('cat') as Cat) || 'todos';
       if (['todos','articulo','escrito','conferencia'].includes(cat)) {
         this.selectedCategory = cat;
-        if (this.hasData) this.resetPaginacion();
       }
     });
 
-    // 2) cargar data y recalcular
-    this.dataService.getAllArchivos().subscribe((data) => {
-      this.archivos = data;
-      this.hasData = true;
-      this.resetPaginacion();
-      this.cargando = false;
+    // Carga de datos
+    this.data.getAllArchivos().subscribe(items => {
+      this.archivos = items;
+      this.loading = false;
+    });
+  }
 
-      // si hay params de modal, intenta abrir
-      this.tryOpenFromParams(this.route.snapshot.paramMap);
+  onCategoryChange(cat: Cat) {
+    if (this.selectedCategory === cat) return;
+
+    // Skeleton inmediato para UX suave
+    this.filtering = true;
+    this.selectedCategory = cat;
+
+    // si el modal está abierto y el item ya no calza, ciérralo
+    if (this.readerOpen && this.readerItem && cat !== 'todos' && this.readerItem.category !== cat) {
+      this.closeReader();
+    }
+
+    // sincroniza ?cat=
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { cat },
+      queryParamsHandling: 'merge',
     });
 
-    // 3) escuchar /:category/:id para abrir/cerrar modal
-    this.route.paramMap.subscribe(p => this.tryOpenFromParams(p));
+    // pequeño delay para que el skeleton se perciba (ajusta 250–400ms)
+    setTimeout(() => { this.filtering = false; }, 350);
   }
 
-  // paginación
-  private resetPaginacion() {
-    this.currentPage = 0;
-    this.visibles = [];
-    this.mostrarMas();
+  openItem(it: ArchivoItem) {
+    this.readerItem = it;
+    this.readerOpen = true;
+    document.body.style.overflow = 'hidden';
   }
 
-  mostrarMas() {
-    const base = this.selectedCategory === 'todos'
-      ? this.archivos
-      : this.archivos.filter(a => a.category === this.selectedCategory);
-    const start = this.currentPage * this.pageSize;
-    const end   = start + this.pageSize;
-    this.visibles = [...this.visibles, ...base.slice(start, end)];
-    this.currentPage++;
-  }
-
-  onCategoryChange(cat: typeof this.selectedCategory) {
-    this.selectedCategory = cat;
-    this.router.navigate([], { queryParams: { cat }, queryParamsHandling: 'merge' });
-    this.resetPaginacion();
-  }
-
-  onOpenItem(it: ArchivoItem) {
-    this.router.navigate(['/archivo', it.category, it.id], { queryParams: { cat: this.selectedCategory } });
-  }
-
-  onCloseReader() {
-    if (window.history.length > 1) history.back();
-    else this.router.navigate(['/archivo'], { queryParams: { cat: this.selectedCategory } });
-  }
-
-  private tryOpenFromParams(p: ParamMap) {
-    const id = p.get('id');
-    const category = p.get('category') as any;
-    if (!id || !category) {
-      this.readerOpen = false;
-      this.readerItem = undefined;
-      document.body.style.overflow = '';
-      return;
-    }
-    const found = this.archivos.find(x => x.id === id && x.category === category);
-    if (found) {
-      this.readerItem = found;
-      this.readerOpen = true;
-      document.body.style.overflow = 'hidden';
-    } else {
-      this.router.navigate(['/archivo'], { queryParams: { cat: this.selectedCategory } });
-    }
-  }
-
-  @HostListener('window:popstate')
-  onPop() {
-    if (!this.route.snapshot.paramMap.get('id')) {
-      document.body.style.overflow = '';
-      this.readerOpen = false;
-      this.readerItem = undefined;
-    }
+  closeReader() {
+    this.readerOpen = false;
+    this.readerItem = undefined;
+    document.body.style.overflow = '';
   }
 }

@@ -1,38 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, EventEmitter, HostListener, Input, Output, AfterViewInit } from '@angular/core';
 import { ArchivoItem } from '../../../interface/archivo.interface';
 
 @Component({
   selector: 'reader-modal',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule],
   templateUrl: './reader-modal.component.html',
 })
-export class ReaderModalComponent implements OnInit {
+export class ReaderModalComponent implements AfterViewInit {
   @Input({ required: true }) item!: ArchivoItem;
   @Output() close = new EventEmitter<void>();
 
-  loading = true;
-  error = false;
-  content = '';
+  entered = false; // animación de entrada
+  closing = false; // animación de salida
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.http.get(this.item.contentPath, { responseType: 'text' }).subscribe({
-      next: (txt) => { this.content = txt; this.loading = false; },
-      error: () => { this.error = true; this.loading = false; }
-    });
+  ngAfterViewInit(): void {
+    requestAnimationFrame(() => { this.entered = true; });
   }
 
-  onClose() {
-    this.close.emit();
+  requestClose() {
+    if (this.closing) return;
+    this.closing = true;
+    setTimeout(() => this.close.emit(), 300); // debe coincidir con duration-300
   }
 
-  // Cerrar con tecla ESC
-  @HostListener('window:keydown.escape')
-  onEsc() {
-    this.onClose();
-  }
+  @HostListener('document:keydown.escape')
+  onEsc() { this.requestClose(); }
 }

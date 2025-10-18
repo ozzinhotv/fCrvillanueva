@@ -1,40 +1,52 @@
-// src/app/page/archivo/services/archivo-data.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, forkJoin, map, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable, forkJoin, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { ArchivoItem } from '../interface/archivo.interface';
+
+type ArchivoManifest = {
+  articulos: string[];
+  escritos: string[];
+  conferencias: string[];
+};
 
 @Injectable({ providedIn: 'root' })
 export class ArchivoDataService {
   constructor(private http: HttpClient) {}
-
   getAllArchivos(): Observable<ArchivoItem[]> {
-    const rutas = [
-      '/assets/data/archivo/articulos/encuesta_alumno.json',
-      '/assets/data/archivo/escritos/templo_coloniales.json',
-      '/assets/data/archivo/conferencias/reflexiones_personales.json',
-    ];
-
-    const peticiones = rutas.map((url) =>
-      this.http.get<ArchivoItem[]>(url).pipe(
-        catchError((err) => {
-          console.warn(`No se pudo cargar ${url}:`, err?.status || err);
-          return of<ArchivoItem[]>([]); // continúa con los demás
-        })
-      )
-    );
-
-    return forkJoin(peticiones).pipe(
-      map((arrays) => arrays.flat()),
-      map((items) => this.shuffle(items))
+    const manifestUrl = 'assets/data/archivo/archivo.index.json';
+    return this.http.get<ArchivoManifest>(manifestUrl).pipe(
+      switchMap((m) => {
+        const relPaths = [
+          ...(m.articulos || []),
+          ...(m.escritos || []),
+          ...(m.conferencias || []),
+        ];
+        const urls = relPaths.map(p => `assets/data/archivo/${p}`);
+        const requests = urls.map(url =>
+          this.http.get<ArchivoItem[]>(url).pipe(
+            catchError(err => {
+              console.warn(`No se pudo cargar ${url}`, err?.status || err);
+              return of<ArchivoItem[]>([]);
+            })
+          )
+        );
+        return forkJoin(requests).pipe(
+          map(arrays => arrays.flat()),
+          map(items  => this.uniqueById(items)),
+          map(items  => this.shuffle(items)),
+        );
+      })
     );
   }
-
-  private shuffle<T>(array: T[]): T[] {
-    return array
-      .map((item) => ({ item, sort: Math.random() }))
-      .sort((a, b) => a.sort - b.sort)
-      .map(({ item }) => item);
+  private uniqueById(items: ArchivoItem[]): ArchivoItem[] {
+    const seen = new Set<string>();
+    return items.filter(it => (seen.has(it.id) ? false : (seen.add(it.id), true)));
+  }
+  private shuffle<T>(arr: T[]): T[] {
+    return arr
+      .map(item => ({ item, r: Math.random() }))
+      .sort((a,b) => a.r - b.r)
+      .map(x => x.item);
   }
 }

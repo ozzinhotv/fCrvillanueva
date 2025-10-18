@@ -1,0 +1,11 @@
+{
+  "articulos": [
+    "articulos/encuesta_alumno.json"
+  ],
+  "escritos": [
+    "escritos/templo_coloniales.json"
+  ],
+  "conferencias": [
+    "conferencias/reflexiones_personales.json"
+  ]
+}

@@ -2,33 +2,28 @@
   image="assets/img/hero/croquisCaoma-1.png"
   title="Archivo"
   subtitle="Legado de un arquitecto"
-  overlayColor="bg-orange-600"
-  pt="pt-24">
-</app-hero>
+  overlayColor="bg-red-600"
+  pt="pt-24"
+/>
 
 <section class="max-w-6xl mx-auto px-4 py-12">
+  <!-- Filtro -->
   <archivo-filter
     [selected]="selectedCategory"
     (selectedChange)="onCategoryChange($event)"
   />
 
+  <!-- Feed con skeleton mientras loading || filtering -->
   <archivo-feed
-    [items]="visibles"
-    [selected]="selectedCategory"
-    [loading]="cargando"
-    (open)="onOpenItem($event)">
-  </archivo-feed>
-
-  <div class="flex justify-center mt-8" *ngIf="!cargando">
-    <button class="px-5 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-white/10"
-            (click)="mostrarMas()">
-      Cargar más
-    </button>
-  </div>
+    [items]="visibleItems"
+    [loading]="loading || filtering"
+    (open)="openItem($event)"
+  />
 </section>
 
+<!-- Modal lector -->
 <reader-modal
   *ngIf="readerOpen && readerItem"
   [item]="readerItem"
-  (close)="onCloseReader()">
-</reader-modal>
+  (close)="closeReader()"
+/>

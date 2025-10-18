@@ -5,9 +5,9 @@ export interface ArchivoBase {
   category: ArchivoCategory;
   title: string;
   author: string;
-  date: string;       // ISO 8601
+  date: string;
   summary: string;
-  contentPath: string; // ruta a .md o .pdf en assets
+  content: string[];
   coverImage?: string;
 }
 
