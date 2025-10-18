@@ -5,7 +5,7 @@ import { VidaComponent } from './pages/vida/vida.component';
 import OBRA_ROUTES from './pages/obra/obra.routes';
 
 export const routes: Routes = [
-  { path: '', component: LandingComponent },   // landing general
+  { path: '', component: LandingComponent },
   { path: 'vida', component: VidaComponent },
   ...OBRA_ROUTES,
   {

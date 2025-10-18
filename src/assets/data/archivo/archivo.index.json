@@ -3,9 +3,11 @@
     "articulos/encuesta_alumno.json"
   ],
   "escritos": [
-    "escritos/templo_coloniales.json"
+    "escritos/templo_coloniales.json",
+    "escritos/caracas_de_ayer.json"
   ],
   "conferencias": [
-    "conferencias/reflexiones_personales.json"
+    "conferencias/reflexiones_personales.json",
+    "conferencias/la_arquitectura.json"
   ]
 }

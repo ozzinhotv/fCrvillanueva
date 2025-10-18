@@ -5,7 +5,6 @@ export type Cat = 'todos' | 'articulo' | 'escrito' | 'conferencia';
 
 @Component({
   selector: 'archivo-filter',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './archivo-filter.component.html',
 })

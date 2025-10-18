@@ -5,7 +5,6 @@ import { ArchivoItem } from '../../../interface/archivo.interface';
 
 @Component({
   selector: 'archivo-feed',
-  standalone: true,
   imports: [CommonModule, ArchivoCardComponent],
   templateUrl: './archivo-feed.component.html',
 })

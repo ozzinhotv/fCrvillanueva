@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'icon-chevron-right',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './chevron-right.component.html',
 })

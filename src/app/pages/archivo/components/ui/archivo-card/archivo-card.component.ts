@@ -4,7 +4,6 @@ import { ArchivoItem } from '../../../interface/archivo.interface';
 
 @Component({
   selector: 'archivo-card',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './archivo-card.component.html',
 })

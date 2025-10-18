@@ -1,5 +1,4 @@
 <section class="relative min-h-[80vh] overflow-hidden bg-neutral-700">
-  <!-- Fondo -->
   <img
     [src]="image"
     [alt]="title"
@@ -7,10 +6,7 @@
     loading="eager"
     fetchpriority="high"
   />
-  <!-- Capa de color -->
   <div class="absolute inset-0" [ngClass]="overlayColor"></div>
-
-  <!-- Contenido -->
   <div class="relative mx-auto max-w-7xl px-6 lg:px-12"
        [class.pt-16]="pt==='pt-16'"
        [class.pt-20]="pt==='pt-20'"

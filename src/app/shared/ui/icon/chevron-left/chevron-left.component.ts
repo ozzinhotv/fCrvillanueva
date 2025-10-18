@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './chevron-left.component.html',
 })
 export class ChevronLeftComponent {
-  @Input() size: number = 28;        // px
-  @Input() stroke: number = 2;       // ancho de línea
-  @Input() ariaLabel = 'Previous';   // accesibilidad
+  @Input() size: number = 28;
+  @Input() stroke: number = 2;
+  @Input() ariaLabel = 'Previous';
 }

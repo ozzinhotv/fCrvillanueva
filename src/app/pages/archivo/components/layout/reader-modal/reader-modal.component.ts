@@ -4,7 +4,6 @@ import { ArchivoItem } from '../../../interface/archivo.interface';
 
 @Component({
   selector: 'reader-modal',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './reader-modal.component.html',
 })
@@ -12,8 +11,8 @@ export class ReaderModalComponent implements AfterViewInit {
   @Input({ required: true }) item!: ArchivoItem;
   @Output() close = new EventEmitter<void>();
 
-  entered = false; // animación de entrada
-  closing = false; // animación de salida
+  entered = false;
+  closing = false;
 
   ngAfterViewInit(): void {
     requestAnimationFrame(() => { this.entered = true; });
@@ -22,7 +21,7 @@ export class ReaderModalComponent implements AfterViewInit {
   requestClose() {
     if (this.closing) return;
     this.closing = true;
-    setTimeout(() => this.close.emit(), 300); // debe coincidir con duration-300
+    setTimeout(() => this.close.emit(), 300);
   }
 
   @HostListener('document:keydown.escape')
