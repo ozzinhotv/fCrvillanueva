@@ -4,14 +4,14 @@
          'md:col-start-1 md:pr-12 md:text-right': side === 'left',
          'md:col-start-2 md:pl-12': side === 'right'
        }">
-    <div data-card (click)="toggle()">
+    <div data-card>
       <vida-card
+        (expandedChange)="onCardExpandedChange($event)"
         [year]="item?.year"
         [title]="item?.title"
         [text]="item?.text"
         [placeholderColor]="item?.placeholderColor || '#e5e7eb'"
-        [imageSide]="item?.imageSide || 'right'"
-      />
+        [imageSide]="item?.imageSide || 'right'"/>
     </div>
   </div>
   <div class="hidden md:block"></div>

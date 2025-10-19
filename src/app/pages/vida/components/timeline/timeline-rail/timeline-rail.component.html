@@ -1,17 +1,64 @@
-<div class="absolute" [ngStyle]="{ top: top + 'px', bottom: bottom + 'px' }">
-  <div class="absolute rail-dot text-neutral-300"
-       [ngStyle]="{ left: mobileLeftA + 'px', width: thickness + 'px', top: 0, bottom: 0 }"
-       class="md:left-1/2 md:[transform:translateX(calc(-1*var(--off)))]" style="--off: {{centerOffset}}px"></div>
+<div class="absolute inset-x-0 pointer-events-none"
+     [style.top]="'var(--railTop)'"
+     [style.bottom]="'var(--railBottom)'">
 
-  <div class="absolute rail-dot text-neutral-300"
-       [ngStyle]="{ left: mobileLeftB + 'px', width: thickness + 'px', top: 0, bottom: 0 }"
-       class="md:left-1/2 md:[transform:translateX(var(--off))]" style="--off: {{centerOffset}}px"></div>
+  <!-- Rieles grises de fondo (todo el alto) -->
+  <div class="absolute inset-y-0 hidden md:block">
+    <div class="absolute w-[2px] text-neutral-300 top-0 bottom-0
+                bg-[repeating-linear-gradient(to_bottom,currentColor_0_6px,transparent_6px_14px)]"
+         [style.left]="'calc(50% - var(--railOffset))'"></div>
+    <div class="absolute w-[2px] text-neutral-300 top-0 bottom-0
+                bg-[repeating-linear-gradient(to_bottom,currentColor_0_6px,transparent_6px_14px)]"
+         [style.left]="'calc(50% + var(--railOffset))'"></div>
+  </div>
 
-  <div *ngIf="segment" class="absolute segment bg-red-600"
-       [ngStyle]="{ left: mobileLeftA + 'px', width: thickness + 'px', top: segment.top + 'px', height: segment.height + 'px', opacity: 1 }"
-       class="md:left-1/2 md:[transform:translateX(calc(-1*var(--off)))]" style="--off: {{centerOffset}}px"></div>
+  <div class="absolute inset-y-0 md:hidden">
+    <div class="absolute w-[2px] text-neutral-300 top-0 bottom-0
+                bg-[repeating-linear-gradient(to_bottom,currentColor_0_6px,transparent_6px_14px)]"
+         [style.left]="'var(--railMobileA)'"></div>
+    <div class="absolute w-[2px] text-neutral-300 top-0 bottom-0
+                bg-[repeating-linear-gradient(to_bottom,currentColor_0_6px,transparent_6px_14px)]"
+         [style.left]="'var(--railMobileB)'"></div>
+  </div>
 
-  <div *ngIf="segment" class="absolute segment bg-red-600"
-       [ngStyle]="{ left: mobileLeftB + 'px', width: thickness + 'px', top: segment.top + 'px', height: segment.height + 'px', opacity: 1 }"
-       class="md:left-1/2 md:[transform:translateX(var(--off))]" style="--off: {{centerOffset}}px"></div>
+  <!-- Segmentos (UN SOLO DIV por segmento con 3 backgrounds) -->
+  <div class="md:hidden">
+    <ng-container *ngFor="let s of segments">
+      <div class="absolute z-10 rounded-lg overflow-hidden backdrop-blur-[2px] bg-transparent
+                  shadow-[0_6px_20px_rgba(0,0,0,0.06)]
+                  transition-[height,top,opacity,transform] duration-[var(--trailDur)] ease-[var(--trailEase)]
+                  will-change-[height,top,opacity,transform]"
+           [style.left]="'var(--railMobileA)'"
+           [style.width]="'calc(var(--railMobileB) - var(--railMobileA))'"
+           [style.top.px]="s.top"
+           [style.height.px]="s.height"
+           [style.backgroundImage]="'repeating-linear-gradient(to_bottom,rgba(115,115,115,.38)_0_6px,transparent_6px_14px),repeating-linear-gradient(to_bottom,rgba(115,115,115,.38)_0_6px,transparent_6px_14px),repeating-linear-gradient(135deg,rgba(239,68,68,.92)_0_18px,transparent_18px_36px)'"
+           [style.backgroundSize]="'2px 100%,2px 100%,36px 36px'"
+           [style.backgroundPosition]="'left top,right top,center'"
+           [style.backgroundRepeat]="'repeat-y,repeat-y,repeat'"
+           [class.opacity-0]="s.closing"
+           [class.scale-y-95]="s.closing">
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="hidden md:block">
+    <ng-container *ngFor="let s of segments">
+      <div class="absolute z-10 rounded-lg overflow-hidden backdrop-blur-[2px] bg-transparent
+                  shadow-[0_6px_20px_rgba(0,0,0,0.06)]
+                  transition-[height,top,opacity,transform] duration-[var(--trailDur)] ease-[var(--trailEase)]
+                  will-change-[height,top,opacity,transform]"
+           [style.left]="'calc(50% - var(--railOffset))'"
+           [style.width]="'calc(2 * var(--railOffset))'"
+           [style.top.px]="s.top"
+           [style.height.px]="s.height"
+           [style.backgroundImage]="'repeating-linear-gradient(to_bottom,rgba(115,115,115,.38)_0_6px,transparent_6px_14px),repeating-linear-gradient(to_bottom,rgba(115,115,115,.38)_0_6px,transparent_6px_14px),repeating-linear-gradient(135deg,rgba(239,68,68,.92)_0_18px,transparent_18px_36px)'"
+           [style.backgroundSize]="'2px 100%,2px 100%,36px 36px'"
+           [style.backgroundPosition]="'left top,right top,center'"
+           [style.backgroundRepeat]="'repeat-y,repeat-y,repeat'"
+           [class.opacity-0]="s.closing"
+           [class.scale-y-95]="s.closing">
+      </div>
+    </ng-container>
+  </div>
 </div>

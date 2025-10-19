@@ -1,32 +1,87 @@
-import { Component, EventEmitter, Input, Output, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../../ui/card/card.component';
-import { fromEvent } from 'rxjs';
-import { auditTime } from 'rxjs/operators';
+
+export type TrailSegEvent = { id: number; seg: { top: number; height: number; closing?: boolean } | null };
 
 @Component({
   selector: 'timeline-item',
   imports: [CommonModule, CardComponent],
   templateUrl: './timeline-item.component.html',
 })
-export class TimelineItemComponent implements AfterViewInit {
+export class TimelineItemComponent {
+  @Input() id!: number;
   @Input() item: any;
   @Input() side: 'left' | 'right' = 'left';
-  @Output() segmentChange = new EventEmitter<{ top: number; height: number } | null>();
-  open = false;
+
+  @Output() segmentChange = new EventEmitter<TrailSegEvent>();
+
+  private open = false;
+  private raf?: number;
+
   constructor(private el: ElementRef<HTMLElement>) {}
-  ngAfterViewInit() {
-    fromEvent(window, 'resize').pipe(auditTime(80)).subscribe(() => { if (this.open) this.emitSeg(); });
+
+  onCardExpandedChange(open: boolean) {
+    const dur = this.getTrailDurationMs();
+
+    if (open) {
+      this.open = true;
+
+      const finalSeg = this.measure();
+      if (!finalSeg) return;
+
+      const startSeg = { top: finalSeg.top, height: 0 };
+      this.segmentChange.emit({ id: this.id, seg: startSeg });
+
+      cancelAnimationFrame(this.raf ?? 0);
+      this.raf = requestAnimationFrame(() => {
+        this.segmentChange.emit({ id: this.id, seg: finalSeg });
+      });
+
+      setTimeout(() => {
+        const adjust = this.measure();
+        if (adjust) this.segmentChange.emit({ id: this.id, seg: adjust });
+      }, dur + 30);
+
+      return;
+    }
+
+    if (this.open) {
+      this.open = false;
+
+      const now = this.measure();
+      if (now) {
+        this.segmentChange.emit({ id: this.id, seg: { ...now, closing: true } });
+        cancelAnimationFrame(this.raf ?? 0);
+        this.raf = requestAnimationFrame(() => {
+          this.segmentChange.emit({ id: this.id, seg: { top: now.top, height: 0, closing: true } });
+        });
+        setTimeout(() => this.segmentChange.emit({ id: this.id, seg: null }), dur + 30);
+      } else {
+        this.segmentChange.emit({ id: this.id, seg: null });
+      }
+    }
   }
-  toggle() { this.open = !this.open; this.open ? this.emitSeg() : this.segmentChange.emit(null); }
-  private emitSeg() {
-    const host = this.el.nativeElement.closest('section') as HTMLElement;
-    const groupRect = host.getBoundingClientRect();
-    const itemRect = this.el.nativeElement.getBoundingClientRect();
-    const card = this.el.nativeElement.querySelector('[data-card]') as HTMLElement;
-    const cardRect = (card || this.el.nativeElement).getBoundingClientRect();
-    const top = cardRect.top - itemRect.top + (itemRect.top - groupRect.top);
-    const height = cardRect.height;
-    this.segmentChange.emit({ top, height });
+
+  private measure(): { top: number; height: number } | null {
+    const section = this.el.nativeElement.closest('section') as HTMLElement | null;
+    if (!section) return null;
+    const railTop = parseFloat(getComputedStyle(section).getPropertyValue('--railTop')) || 0;
+    const sectionRect = section.getBoundingClientRect();
+    const cardEl = this.el.nativeElement.querySelector('[data-card]') as HTMLElement | null;
+    const rect = (cardEl || this.el.nativeElement).getBoundingClientRect();
+    const top = rect.top - sectionRect.top - railTop;
+    const height = rect.height;
+    return height > 0 ? { top, height } : null;
+    }
+
+  private getTrailDurationMs(): number {
+    const section = this.el.nativeElement.closest('section') as HTMLElement | null;
+    if (!section) return 380;
+    const raw = getComputedStyle(section).getPropertyValue('--trailDur').trim();
+    if (raw.endsWith('ms')) return parseFloat(raw);
+    if (raw.endsWith('s')) return parseFloat(raw) * 1000;
+    const n = parseFloat(raw);
+    return isNaN(n) ? 380 : n;
   }
 }

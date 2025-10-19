@@ -1,16 +1,17 @@
 <article class="mx-auto max-w-[380px] md:max-w-[520px] rounded-xl bg-white p-3 shadow-sm border border-neutral-200">
-  <button
-    type="button"
-    class="flex w-full items-center justify-between gap-2 text-left"
-    [attr.aria-expanded]="expanded"
-    (click)="toggle()"
-  >
+  <button type="button"
+          class="flex w-full items-center justify-between gap-2 text-left"
+          [attr.aria-expanded]="expanded"
+          (click)="toggle()">
     <card-header [year]="year" [title]="title"></card-header>
-    <span class="text-red-600 transition-transform duration-300"
-          [ngClass]="expanded ? 'rotate-180' : 'rotate-0'">▾</span>
+    <span class="text-red-600 transition-transform duration-300" [ngClass]="expanded ? 'rotate-180' : 'rotate-0'">▾</span>
   </button>
-  <div class="overflow-hidden transition-all duration-300"
-       [ngClass]="expanded ? 'max-h-[500px] mt-2' : 'max-h-0'">
+
+  <div class="overflow-hidden"
+       [style.transitionProperty]="'max-height, margin'"
+       [style.transitionDuration]="'var(--trailDur)'"
+       [style.transitionTimingFunction]="'var(--trailEase)'"
+       [ngClass]="expanded ? 'max-h-[560px] mt-2' : 'max-h-0'">
     <div class="grid grid-cols-12 items-start gap-3">
       <div class="col-span-5" [ngClass]="{ 'order-2': imageSide==='right', 'order-1': imageSide==='left' }">
         <card-img [color]="placeholderColor"/>
