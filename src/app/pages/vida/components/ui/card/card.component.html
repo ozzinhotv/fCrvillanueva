@@ -4,21 +4,28 @@
           [attr.aria-expanded]="expanded"
           (click)="toggle()">
     <card-header [year]="year" [title]="title"></card-header>
-    <span class="text-red-600 transition-transform duration-300" [ngClass]="expanded ? 'rotate-180' : 'rotate-0'">▾</span>
+    <span class="text-red-600 transition-transform duration-300"
+          [ngClass]="expanded ? 'rotate-180' : 'rotate-0'">▾</span>
   </button>
 
-  <div class="overflow-hidden"
-       [style.transitionProperty]="'max-height, margin'"
-       [style.transitionDuration]="'var(--trailDur)'"
-       [style.transitionTimingFunction]="'var(--trailEase)'"
+  <div class="overflow-hidden transition-all duration-300 ease-out"
        [ngClass]="expanded ? 'max-h-[560px] mt-2' : 'max-h-0'">
-    <div class="grid grid-cols-12 items-start gap-3">
-      <div class="col-span-5" [ngClass]="{ 'order-2': imageSide==='right', 'order-1': imageSide==='left' }">
-        <card-img [color]="placeholderColor"/>
+    <div class="grid grid-cols-12 items-stretch gap-4">
+      <div class="order-1 col-span-12 md:col-span-7"
+           [ngClass]="{ 'md:order-2': imageSide==='left', 'md:order-1': imageSide==='right' }">
+        <card-text [text]="text"></card-text>
       </div>
-      <div class="col-span-7" [ngClass]="{ 'order-1': imageSide==='right', 'order-2': imageSide==='left' }">
-        <card-text [text]="text"/>
+
+      <div class="order-2 col-span-12 md:col-span-5 md:h-full"
+           [ngClass]="{ 'md:order-1': imageSide==='left', 'md:order-2': imageSide==='right' }">
+        <div class="h-full min-h-28 md:min-h-[180px]">
+          <div class="h-full w-full cursor-zoom-in" (click)="openModal()">
+            <card-img [img]="img" [color]="placeholderColor"></card-img>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <card-modal [open]="modalOpen" [img]="img" [alt]="title || (year + '')" (close)="modalOpen = false"></card-modal>
 </article>

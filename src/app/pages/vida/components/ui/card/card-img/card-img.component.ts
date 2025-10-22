@@ -7,7 +7,18 @@ import { Component, Input } from '@angular/core';
   templateUrl: './card-img.component.html',
 })
 export class CardImageComponent {
-  @Input() color = 'bg-red-600';
-  @Input() aspect = 'aspect-[4/3]';
+  @Input() img: string | null | undefined;
+  @Input() color: string = '#ef4444';
   @Input() rounded = 'rounded-xl';
+
+  get isImg(): boolean {
+    return !!this.img && this.img.trim().length > 0;
+  }
+
+  get bgStyle(): Record<string, string> {
+    const c = this.color && (this.color.startsWith('#') || this.color.startsWith('rgb')) ? this.color : '#ef4444';
+    return {
+      background: `repeating-linear-gradient(135deg, ${c} 0 16px, transparent 16px 32px)`
+    };
+  }
 }

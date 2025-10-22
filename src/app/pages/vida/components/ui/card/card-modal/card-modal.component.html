@@ -1,0 +1,21 @@
+<div class="fixed inset-0 z-[100] flex items-center justify-center"
+     [class.pointer-events-none]="!open">
+
+  <div class="absolute inset-0 bg-black/60 transition-opacity duration-200 ease-out"
+       [class.opacity-0]="!open"
+       (click)="close.emit()"></div>
+
+  <div class="relative max-h-[88vh] max-w-[92vw] md:max-w-5xl
+              rounded-xl overflow-hidden bg-neutral-900/60 backdrop-blur-md
+              ring-1 ring-white/10 shadow-xl
+              transition-transform duration-200 ease-out"
+              [class.opacity-0]="!open"
+              [class.translate-y-2]="!open"
+              [class.opacity-100]="open"
+              [class.translate-y-0]="open">
+    <close-icon (click)="close.emit()"/>
+
+    <img [src]="img || ''" [alt]="alt"
+         class="block max-h-[88vh] w-auto object-contain select-none">
+  </div>
+</div>

@@ -1,1 +1,4 @@
-<div class="w-full aspect-[3/2] md:aspect-auto md:h-28" [ngStyle]="{ backgroundColor: color }"></div>
+<div class="w-full h-full">
+  <img *ngIf="isImg" [src]="img!" alt="" class="h-full w-full object-cover" [ngClass]="rounded"/>
+  <div *ngIf="!isImg" class="h-full w-full" [ngClass]="rounded" [ngStyle]="bgStyle"></div>
+</div>

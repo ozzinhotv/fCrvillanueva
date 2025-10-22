@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from '../../ui/card/card.component';
 
@@ -9,79 +9,119 @@ export type TrailSegEvent = { id: number; seg: { top: number; height: number; cl
   imports: [CommonModule, CardComponent],
   templateUrl: './timeline-item.component.html',
 })
-export class TimelineItemComponent {
+export class TimelineItemComponent implements AfterViewInit, OnDestroy {
   @Input() id!: number;
   @Input() item: any;
   @Input() side: 'left' | 'right' = 'left';
-
   @Output() segmentChange = new EventEmitter<TrailSegEvent>();
 
   private open = false;
-  private raf?: number;
+  private roSection?: ResizeObserver;
+  private roList?: ResizeObserver;
 
   constructor(private el: ElementRef<HTMLElement>) {}
 
+  ngAfterViewInit() {
+    window.addEventListener('resize', this.onResize, { passive: true });
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('scroll', this.onScroll);
+    this.stopObservers();
+  }
+
   onCardExpandedChange(open: boolean) {
-    const dur = this.getTrailDurationMs();
+    this.open = open;
 
     if (open) {
-      this.open = true;
-
-      const finalSeg = this.measure();
-      if (!finalSeg) return;
-
-      const startSeg = { top: finalSeg.top, height: 0 };
-      this.segmentChange.emit({ id: this.id, seg: startSeg });
-
-      cancelAnimationFrame(this.raf ?? 0);
-      this.raf = requestAnimationFrame(() => {
-        this.segmentChange.emit({ id: this.id, seg: finalSeg });
-      });
-
-      setTimeout(() => {
-        const adjust = this.measure();
-        if (adjust) this.segmentChange.emit({ id: this.id, seg: adjust });
-      }, dur + 30);
-
+      this.startObservers();
+      // Emito SEGMENTO FINAL inmediatamente (sin esperar transición del card)
+      const seg = this.measureFinal();
+      if (seg) this.segmentChange.emit({ id: this.id, seg });
       return;
     }
 
-    if (this.open) {
-      this.open = false;
-
-      const now = this.measure();
-      if (now) {
-        this.segmentChange.emit({ id: this.id, seg: { ...now, closing: true } });
-        cancelAnimationFrame(this.raf ?? 0);
-        this.raf = requestAnimationFrame(() => {
-          this.segmentChange.emit({ id: this.id, seg: { top: now.top, height: 0, closing: true } });
-        });
-        setTimeout(() => this.segmentChange.emit({ id: this.id, seg: null }), dur + 30);
-      } else {
-        this.segmentChange.emit({ id: this.id, seg: null });
-      }
-    }
+    // Cierre: elimino inmediatamente el segmento
+    this.segmentChange.emit({ id: this.id, seg: null });
+    this.stopObservers();
   }
 
-  private measure(): { top: number; height: number } | null {
-    const section = this.el.nativeElement.closest('section') as HTMLElement | null;
+  // --- Observadores sobre contenedores que cambian el layout ---
+  private startObservers() {
+    this.stopObservers();
+    const section = this.closestSection();
+    const list = this.closestList();
+    this.roSection = new ResizeObserver(() => this.emitNow());
+    if (section) this.roSection.observe(section);
+    this.roList = new ResizeObserver(() => this.emitNow());
+    if (list) this.roList.observe(list);
+  }
+
+  private stopObservers() {
+    this.roSection?.disconnect(); this.roSection = undefined;
+    this.roList?.disconnect(); this.roList = undefined;
+  }
+
+  // --- Emisión síncrona, sin rAF/timeout ---
+  private emitNow() {
+    if (!this.open) return;
+    const seg = this.measureSync();
+    if (seg) this.segmentChange.emit({ id: this.id, seg });
+  }
+
+  // --- Medición instantánea (estado actual en pantalla) ---
+  private measureSync(): { top: number; height: number } | null {
+    const section = this.closestSection();
     if (!section) return null;
     const railTop = parseFloat(getComputedStyle(section).getPropertyValue('--railTop')) || 0;
     const sectionRect = section.getBoundingClientRect();
-    const cardEl = this.el.nativeElement.querySelector('[data-card]') as HTMLElement | null;
-    const rect = (cardEl || this.el.nativeElement).getBoundingClientRect();
+    const card = this.cardEl() || this.el.nativeElement;
+    const rect = card.getBoundingClientRect();
     const top = rect.top - sectionRect.top - railTop;
     const height = rect.height;
     return height > 0 ? { top, height } : null;
-    }
-
-  private getTrailDurationMs(): number {
-    const section = this.el.nativeElement.closest('section') as HTMLElement | null;
-    if (!section) return 380;
-    const raw = getComputedStyle(section).getPropertyValue('--trailDur').trim();
-    if (raw.endsWith('ms')) return parseFloat(raw);
-    if (raw.endsWith('s')) return parseFloat(raw) * 1000;
-    const n = parseFloat(raw);
-    return isNaN(n) ? 380 : n;
   }
+
+  // --- Medición de ALTURA FINAL al abrir (usa scrollHeight del contenido colapsable) ---
+  private measureFinal(): { top: number; height: number } | null {
+    const section = this.closestSection();
+    if (!section) return null;
+    const railTop = parseFloat(getComputedStyle(section).getPropertyValue('--railTop')) || 0;
+
+    const card = this.cardEl();
+    const content = this.cardContent();
+    if (!card) return this.measureSync();
+    const sectionRect = section.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+
+    // base = todo lo que NO es el contenido colapsable (header, paddings, bordes, etc.)
+    const contentRect = content?.getBoundingClientRect();
+    const base = contentRect ? (cardRect.height - contentRect.height) : cardRect.height;
+
+    // altura final = base + scrollHeight REAL del contenido
+    const finalContent = content ? content.scrollHeight : (contentRect?.height ?? 0);
+    const finalHeight = Math.max(0, base + finalContent);
+
+    const top = cardRect.top - sectionRect.top - railTop;
+    return { top, height: finalHeight };
+  }
+
+  private closestSection(): HTMLElement | null {
+    return this.el.nativeElement.closest('section');
+  }
+  private closestList(): HTMLElement | null {
+    return this.el.nativeElement.closest('ol');
+  }
+  private cardEl(): HTMLElement | null {
+    return this.el.nativeElement.querySelector('[data-card]') as HTMLElement | null;
+  }
+  private cardContent(): HTMLElement | null {
+    // El div colapsable del card tiene la clase de transición
+    return this.el.nativeElement.querySelector('[data-card] .transition-all') as HTMLElement | null;
+  }
+
+  private onResize = () => { this.emitNow(); };
+  private onScroll  = () => { this.emitNow(); };
 }
